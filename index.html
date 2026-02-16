@@ -1,94 +1,50 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<title>كشف العائلة</title>
-
-<style>
-body{
-  font-family: Tahoma, Arial;
-  background:#f7f7f7;
-  padding:20px;
-}
-h2{margin-bottom:10px}
-input{
-  padding:10px;
-  width:300px;
-  font-size:16px;
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
-  background:#fff;
-}
-th,td{
-  border:1px solid #ccc;
-  padding:10px;
-  text-align:right;
-}
-th{
-  background:#0f5c6e;
-  color:#fff;
-}
-tr:nth-child(even){background:#f2f2f2}
-.note{color:#666;margin-top:8px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SMOU | Documents</title>
+  <style>
+    body{font-family:Tahoma,Arial,sans-serif;background:#f6f7fb;margin:0;padding:20px}
+    .wrap{max-width:900px;margin:0 auto;background:#fff;border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    h1{margin:0 0 12px;text-align:center}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:700px){.grid{grid-template-columns:1fr}}
+    a.btn{
+      display:block;text-decoration:none;text-align:center;
+      padding:14px 12px;border-radius:12px;
+      background:#0f5c6e;color:#fff;font-weight:700;
+      border:1px solid rgba(0,0,0,.06)
+    }
+    a.btn:hover{filter:brightness(.95)}
+    .note{margin-top:12px;color:#666;font-size:13px;text-align:center}
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <h1>مستندات SMOU</h1>
 
-<h2>🔎 البحث باسم العائلة</h2>
+    <div class="grid">
+      <!-- PDF Links (غيّر الروابط حسب مكان ملفاتك) -->
+      <a class="btn" href="/pdf/profile-smou-group-2026.pdf" target="_blank">البروفايل</a>
+      <a class="btn" href="/pdf/catalog-italy-decor.pdf" target="_blank">كاتلوج ديكورات إيطالي</a>
+      <a class="btn" href="/pdf/catalog-fuji-decor.pdf" target="_blank">كاتلوج ديكورات فوجي</a>
+      <a class="btn" href="/pdf/licenses-approvals.pdf" target="_blank">التراخيص والاعتمادات</a>
+      <a class="btn" href="/pdf/company-comparison.pdf" target="_blank">مقارنة الشركات</a>
+      <a class="btn" href="/pdf/importance-of-contract.pdf" target="_blank">أهمية التعاقد</a>
 
-<input id="search" placeholder="اكتب اسم العائلة" />
-<div class="note" id="info">يرجى رفع ملف البيانات</div>
-<br><br>
-<input type="file" id="file" accept=".csv">
+      <!-- Subdomain Tools -->
+      <a class="btn" href="https://family.smougroup.com" target="_blank">كشف العائلات</a>
+      <a class="btn" href="https://office.smougroup.com" target="_blank">كشف المكاتب</a>
+      <a class="btn" href="https://area.smougroup.com" target="_blank">كشف المناطق</a>
 
-<table id="table" style="display:none">
-  <thead></thead>
-  <tbody></tbody>
-</table>
+      <!-- آخر زر حسب ما عندك (PDF أو صفحة) -->
+      <a class="btn" href="/pdf/labor-work.pdf" target="_blank">كشف العمل والعمال</a>
+    </div>
 
-<script>
-let data=[], headers=[];
-const FAMILY_COL = "العائلة";
-
-document.getElementById("file").addEventListener("change", async e=>{
-  const text = await e.target.files[0].text();
-  const lines = text.trim().split("\n");
-  headers = lines[0].split(",");
-  data = lines.slice(1).map(l=>{
-    let obj={};
-    l.split(",").forEach((v,i)=>obj[headers[i]]=v);
-    return obj;
-  });
-  document.getElementById("info").innerText="تم تحميل البيانات";
-});
-
-document.getElementById("search").addEventListener("input",()=>{
-  const q = document.getElementById("search").value.trim();
-  const table = document.getElementById("table");
-  const thead = table.querySelector("thead");
-  const tbody = table.querySelector("tbody");
-
-  if(!q){ table.style.display="none"; return; }
-
-  const norm = s => (s||"").toString().trim().replace(/\s+/g," ");
-const res = data.filter(r => norm(r[FAMILY_COL]).includes(norm(q)));
-
-  if(!res.length){
-    document.getElementById("info").innerText="لا توجد نتائج";
-    table.style.display="none";
-    return;
-  }
-
-  thead.innerHTML="<tr>"+headers.map(h=>`<th>${h}</th>`).join("")+"</tr>";
-  tbody.innerHTML=res.map(r=>"<tr>"+headers.map(h=>`<td>${r[h]||""}</td>`).join("")+"</tr>").join("");
-  table.style.display="table";
-  document.getElementById("info").innerText=`عدد النتائج: ${res.length}`;
-});
-</script>
-
+    <div class="note">
+      ملاحظة: عدّل مسار كل ملف حسب مكانه الحقيقي داخل public_html.
+    </div>
+  </div>
 </body>
 </html>
