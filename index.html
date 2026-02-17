@@ -2,48 +2,202 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SMOU | Documents</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>مستندات SMOU</title>
+
   <style>
-    body{font-family:Tahoma,Arial,sans-serif;background:#f6f7fb;margin:0;padding:20px}
-    .wrap{max-width:900px;margin:0 auto;background:#fff;border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-    h1{margin:0 0 12px;text-align:center}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    @media (max-width:700px){.grid{grid-template-columns:1fr}}
-    a.btn{
-      display:block;text-decoration:none;text-align:center;
-      padding:14px 12px;border-radius:12px;
-      background:#0f5c6e;color:#fff;font-weight:700;
-      border:1px solid rgba(0,0,0,.06)
+    :root{
+      --brand:#0f5c6e;
+      --brand2:#0b4b5a;
+      --bg:#f4f6f8;
+      --card:#ffffff;
+      --text:#0b2230;
+      --muted:#6b7c85;
+      --shadow: 0 14px 40px rgba(0,0,0,.10);
+      --radius:18px;
     }
-    a.btn:hover{filter:brightness(.95)}
-    .note{margin-top:12px;color:#666;font-size:13px;text-align:center}
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 22px;
+    }
+
+    .wrap{
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px 22px 18px;
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.05);
+    }
+
+    .header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 18px;
+    }
+
+    .logo{
+      width: 92px;
+      height: 92px;
+      border-radius: 16px;
+      object-fit: contain;
+      background:#fff;
+      border: 1px solid rgba(0,0,0,.08);
+      padding:10px;
+    }
+
+    h1{
+      margin:0;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing:.5px;
+      line-height:1.1;
+    }
+    h1 span{
+      font-weight:900;
+      margin-left:10px;
+    }
+
+    .sections{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 18px 14px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration:none;
+      font-size: 20px;
+      font-weight: 700;
+      border-radius: 14px;
+      transition: .15s ease-in-out;
+      box-shadow: 0 10px 22px rgba(15,92,110,.18);
+      border: 1px solid rgba(255,255,255,.08);
+      min-height: 62px;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      background: var(--brand2);
+      box-shadow: 0 16px 32px rgba(15,92,110,.22);
+    }
+
+    .btn.secondary{
+      background:#123b45;
+    }
+    .btn.secondary:hover{ background:#0e2f37; }
+
+    .btn.download::after{
+      content:"⬇";
+      font-size: 18px;
+      margin-right: 10px;
+      opacity:.95;
+    }
+
+    .divider{
+      margin: 22px 0 14px;
+      height:1px;
+      background: rgba(0,0,0,.08);
+    }
+
+    .subhead{
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--muted);
+      text-align:center;
+      font-weight:700;
+    }
+
+    .note{
+      margin-top: 14px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* responsive */
+    @media (max-width: 860px){
+      h1{font-size: 30px;}
+      .sections{grid-template-columns: 1fr;}
+      .btn{font-size: 18px;}
+      .logo{width:84px;height:84px;}
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <h1>مستندات SMOU</h1>
+    <div class="card">
 
-    <div class="grid">
-      <!-- PDF Links (غيّر الروابط حسب مكان ملفاتك) -->
-      <a class="btn" href="/pdf/profile-smou-group-2026.pdf" target="_blank">البروفايل</a>
-      <a class="btn" href="/pdf/catalog-italy-decor.pdf" target="_blank">كاتلوج ديكورات إيطالي</a>
-      <a class="btn" href="/pdf/catalog-fuji-decor.pdf" target="_blank">كاتلوج ديكورات فوجي</a>
-      <a class="btn" href="/pdf/licenses-approvals.pdf" target="_blank">التراخيص والاعتمادات</a>
-      <a class="btn" href="/pdf/company-comparison.pdf" target="_blank">مقارنة الشركات</a>
-      <a class="btn" href="/pdf/importance-of-contract.pdf" target="_blank">أهمية التعاقد</a>
+      <!-- ضع شعارك هنا: ارفع ملف logo.png في نفس المجلد -->
+      <div class="header">
+        <img class="logo" src="logo.png" alt="SMOU Logo">
+        <h1><span>SMOU</span> مستندات</h1>
+      </div>
 
-      <!-- Subdomain Tools -->
-      <a class="btn" href="https://family.smougroup.com" target="_blank">كشف العائلات</a>
-      <a class="btn" href="https://office.smougroup.com" target="_blank">كشف المكاتب</a>
-      <a class="btn" href="https://area.smougroup.com" target="_blank">كشف المناطق</a>
+      <!-- مستندات وروابط أساسية -->
+      <div class="sections">
+        <a class="btn" href="https://online.pubhtml5.com/gruby/ofcy/" target="_blank" rel="noopener">البروفايل</a>
+        <a class="btn" href="https://online.pubhtml5.com/gruby/dqrz/" target="_blank" rel="noopener">Catalogue Fuji</a>
 
-      <!-- آخر زر حسب ما عندك (PDF أو صفحة) -->
-      <a class="btn" href="/pdf/labor-work.pdf" target="_blank">كشف العمل والعمال</a>
-    </div>
+        <a class="btn" href="https://online.pubhtml5.com/gruby/aomk/" target="_blank" rel="noopener">Catalogue Italy</a>
+        <a class="btn" href="https://online.pubhtml5.com/gruby/lcnz/" target="_blank" rel="noopener">التراخيص والاعتمادات</a>
 
-    <div class="note">
-      ملاحظة: عدّل مسار كل ملف حسب مكانه الحقيقي داخل public_html.
+        <a class="btn" href="https://family.smougroup.com/" target="_blank" rel="noopener">كشف العائلات</a>
+        <a class="btn" href="https://area.smougroup.com/" target="_blank" rel="noopener">كشف المناطق</a>
+
+        <a class="btn" href="https://office.smougroup.com/" target="_blank" rel="noopener">كشف الشركات</a>
+        <a class="btn download" href="company%20comprise.pdf" download>مقارنة الشركات (PDF)</a>
+
+        <a class="btn download" href="important.pdf" download>أهمية التعاقد (PDF)</a>
+        <a class="btn download" href="labor.pdf" download>كشف العمل والعمال (PDF)</a>
+
+        <a class="btn download" href="Maintinance.pdf" download>كشف الصيانة (PDF)</a>
+        <a class="btn" href="https://wa.me/971501035499?text=مرحبا%20اريد%20الاستفسار%20عن%20خدماتكم" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+
+      <div class="divider"></div>
+      <p class="subhead">روابط السوشيال والموقع</p>
+
+      <!-- سوشيال -->
+      <div class="sections">
+        <a class="btn secondary" href="https://smoulift.com/" target="_blank" rel="noopener">Website</a>
+        <a class="btn secondary" href="https://www.instagram.com/smou.group/" target="_blank" rel="noopener">Instagram</a>
+
+        <a class="btn secondary" href="https://www.facebook.com/smoulift/" target="_blank" rel="noopener">Facebook</a>
+        <a class="btn secondary" href="https://www.tiktok.com/@smou.group?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">TikTok</a>
+
+        <a class="btn secondary" href="https://x.com/smou_group" target="_blank" rel="noopener">X</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/smou-group-88a5ba18a/" target="_blank" rel="noopener">LinkedIn</a>
+
+        <a class="btn secondary" href="https://www.pinterest.com/SMOUGROUP/" target="_blank" rel="noopener">Pinterest</a>
+        <a class="btn secondary" href="https://www.youtube.com/@smou-group/featured" target="_blank" rel="noopener">YouTube</a>
+
+        <a class="btn secondary" href="https://accounts.snapchat.com/v2/welcome" target="_blank" rel="noopener">Snapchat</a>
+        <a class="btn secondary" href="https://documents.smougroup.com/" target="_self">Documents Home</a>
+      </div>
+
+      <div class="note">
+        ملاحظة: ضع ملفات PDF داخل <b>public_html</b> بنفس أسماء الروابط، وأعد تسمية الشعار إلى <b>logo.png</b>.
+      </div>
+
     </div>
   </div>
 </body>
