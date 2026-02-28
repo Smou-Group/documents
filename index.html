@@ -43,35 +43,6 @@
       width:100%;
     }
 
-    /* ===== Back Arrow Button (Glass) ===== */
-    .backBtn{
-      position:absolute;
-      top:18px;
-      right:18px; /* RTL: أعلى يمين */
-      width:46px;
-      height:46px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.22);
-      background:rgba(255,255,255,0.10);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
-      z-index:5;
-    }
-    .backBtn:hover{
-      background:rgba(255,255,255,0.18);
-      transform:translateY(-4px);
-      box-shadow:0 18px 45px rgba(0,0,0,.38);
-    }
-    .backBtn svg{
-      width:18px;height:18px;
-    }
-
     .logo{
       width:72px;height:72px;
       margin:0 auto 18px;
@@ -177,7 +148,6 @@
       white-space:nowrap;
     }
 
-    /* small helper for LTR text inside RTL */
     .ltr{direction:ltr; unicode-bidi:plaintext}
 
     @media(max-width:520px){
@@ -186,7 +156,6 @@
       .btn{font-size:15px}
       .sectionTitle{font-size:13px}
       .iconGrid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
-      .backBtn{top:14px; right:14px; width:44px; height:44px;}
     }
   </style>
 </head>
@@ -194,14 +163,6 @@
 <body>
 <section class="hero">
 <div class="container">
-
-  <!-- زر الرجوع (سهم صغير بنفس نمط الجلاس) -->
-  <button class="backBtn" type="button" aria-label="رجوع" onclick="history.back()">
-    <!-- سهم لليسار (مناسب للرجوع في RTL) -->
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M15 6 9 12l6 6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
 
   <div class="logo">
     <img src="logo.png" alt="SMOU GROUP">
