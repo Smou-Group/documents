@@ -3,1059 +3,483 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SMOU GROUP — مجموعة سمو</title>
+<title>SMOU GROUP — البوابة الرسمية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg1:#03070f;
-  --bg2:#081527;
-  --bg3:#0c2038;
+  --navy-950:#071b31;
+  --navy-900:#0b2947;
+  --navy-800:#123a63;
+  --navy-700:#1a4c80;
+  --blue:#1f6fd6;
+  --blue-light:#5ea6ef;
   --sky:#8fd6ff;
-  --sky-light:#d7f1ff;
-  --sky-deep:#3d8fd0;
-  --ivory:#ffffff;
-  --text:#eef6ff;
-  --muted:rgba(238,246,255,.72);
-  --border:rgba(143,214,255,.22);
-  --metal-1:rgba(255,255,255,.16);
-  --metal-2:rgba(143,214,255,.06);
-  --shadow:0 18px 45px rgba(0,0,10,.40);
-  --shadowStrong:0 30px 80px rgba(0,0,10,.55);
-  --nav-h:64px;
+  --ink:#0b2540;
+  --muted:#5b6b7c;
+  --bg:#ffffff;
+  --bg-soft:#f4f7fb;
+  --line:#e4eaf1;
+  --shadow:0 24px 60px -20px rgba(11,37,64,.28);
 }
-
 *{box-sizing:border-box}
-html,body{
-  margin:0;
-  padding:0;
-  font-family:"Tajawal",sans-serif;
-  background:linear-gradient(180deg,#03060d,#081527 55%,#050d1a);
-  color:var(--text);
-  overflow-x:hidden;
-}
 html{scroll-behavior:smooth}
-body{min-height:100vh; position:relative;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+body{margin:0; font-family:"Tajawal",sans-serif; color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:"Cairo",sans-serif; margin:0;}
+p{margin:0}
+a{color:inherit; text-decoration:none}
+.wrap{max-width:1240px; margin:0 auto; padding:0 32px;}
+:focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
+button{font-family:inherit}
 
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
-}
-
-/* fine brushed-metal grain, very subtle, gives the glass a machined feel */
-.grain{
-  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* AI neural-network canvas — drifting nodes + connecting light-lines behind the hero */
-.aiCanvas{
-  position:absolute; inset:0; z-index:-3; opacity:.55; pointer-events:none;
-}
-
-/* AI scan beam — a light sweep that reads as a system actively "thinking" */
-.scanBeam{
-  position:absolute; left:0; right:0; height:140px; z-index:-1; pointer-events:none;
-  background:linear-gradient(180deg, transparent, rgba(143,214,255,.10) 45%, rgba(215,241,255,.16) 50%, rgba(143,214,255,.10) 55%, transparent);
-  mix-blend-mode:screen;
-  animation:scanSweep 9s ease-in-out infinite;
-}
-@keyframes scanSweep{
-  0%{top:-140px}
-  50%{top:100%}
-  50.01%{top:-140px}
-  100%{top:-140px}
-}
-@media (max-width:760px){ .scanBeam{display:none} }
-
-/* HUD corner brackets — reads as an AI system panel, applied to portalCard */
-.hud{position:relative;}
-.hud::before{
-  content:""; position:absolute; width:22px; height:22px; z-index:3; pointer-events:none;
-  border-color:rgba(143,214,255,.55); border-style:solid; border-width:0;
-  filter:drop-shadow(0 0 6px rgba(143,214,255,.35));
-  top:14px; inset-inline-start:14px; border-top-width:2px; border-inline-start-width:2px; border-top-left-radius:8px;
-}
-.hud::after{
-  content:""; position:absolute; width:22px; height:22px; z-index:3; pointer-events:none;
-  border-color:rgba(143,214,255,.55); border-style:solid; border-width:0;
-  filter:drop-shadow(0 0 6px rgba(143,214,255,.35));
-  bottom:14px; inset-inline-end:14px; border-bottom-width:2px; border-inline-end-width:2px; border-bottom-right-radius:8px;
-}
-.hudTR,.hudBL{
-  position:absolute; width:22px; height:22px; z-index:3; pointer-events:none;
-  border-color:rgba(143,214,255,.55); border-style:solid; border-width:0;
-  filter:drop-shadow(0 0 6px rgba(143,214,255,.35));
-}
-.hudTR{top:14px; inset-inline-end:14px; border-top-width:2px; border-inline-end-width:2px; border-top-right-radius:8px;}
-.hudBL{bottom:14px; inset-inline-start:14px; border-bottom-width:2px; border-inline-start-width:2px; border-bottom-left-radius:8px;}
-
-body::before,
-body::after{
-  content:"";
-  position:fixed;
-  inset:auto;
-  width:34vw;
-  height:34vw;
-  border-radius:50%;
-  filter:blur(110px);
-  opacity:.18;
-  pointer-events:none;
-  z-index:0;
-  animation:blobFloat 12s ease-in-out infinite;
-}
-body::before{
-  top:-8vw; right:-6vw;
-  background:radial-gradient(circle, rgba(143,214,255,.9), transparent 64%);
-}
-body::after{
-  left:-8vw; bottom:-10vw;
-  background:radial-gradient(circle, rgba(255,255,255,.35), transparent 60%);
-  animation-delay:-5s;
-}
-@keyframes blobFloat{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-16px) scale(1.06)}
-}
-
-/* ============ ELEVATOR DOOR INTRO — signature load moment ============ */
-.doorIntro{
-  position:fixed; inset:0; z-index:300; display:flex;
-  pointer-events:none;
-}
-.doorPanel{
-  position:relative; width:50%; height:100%;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,.03), transparent 40%),
-    repeating-linear-gradient(180deg, rgba(255,255,255,.05) 0px, rgba(255,255,255,.05) 1px, transparent 1px, transparent 5px),
-    linear-gradient(160deg, #0d1e33, #061020 55%, #030710);
-  transition:transform 1.15s cubic-bezier(.65,0,.2,1);
-  box-shadow:inset 0 0 80px rgba(0,0,10,.6);
-}
-.doorPanel::after{
-  content:""; position:absolute; top:0; bottom:0; width:2px;
-  background:linear-gradient(180deg, transparent, rgba(143,214,255,.7), transparent);
-  box-shadow:0 0 18px rgba(143,214,255,.6);
-}
-.doorLeft{transform:translateX(0)}
-.doorLeft::after{right:0}
-.doorRight{transform:translateX(0)}
-.doorRight::after{left:0}
-.doorMark{
-  position:absolute; top:50%; transform:translateY(-50%);
-  font-family:"Cairo",sans-serif; font-weight:800; font-size:15px; letter-spacing:6px;
-  color:rgba(143,214,255,.55);
-}
-.doorLeft .doorMark{right:36px}
-.doorRight .doorMark{left:36px}
-.doorChime{
-  position:absolute; top:50%; left:50%; width:10px; height:10px; border-radius:50%;
-  transform:translate(-50%,-50%) scale(0);
-  background:radial-gradient(circle, #fff, var(--sky) 45%, transparent 72%);
-  box-shadow:0 0 0 0 rgba(143,214,255,.6);
-  z-index:301;
-}
-.doorIntro.open .doorLeft{transform:translateX(-101%)}
-.doorIntro.open .doorRight{transform:translateX(101%)}
-.doorIntro.open .doorChime{animation:chimePulse .9s ease-out forwards;}
-.doorIntro.hide{display:none;}
-@keyframes chimePulse{
-  0%{transform:translate(-50%,-50%) scale(.2); opacity:1; box-shadow:0 0 0 0 rgba(143,214,255,.55)}
-  60%{opacity:1}
-  100%{transform:translate(-50%,-50%) scale(9); opacity:0; box-shadow:0 0 0 40px rgba(143,214,255,0)}
-}
-
-/* ============ FLOOR RAIL — elevator-position indicator, doubles as nav ============ */
-.floorRail{
-  position:fixed; top:50%; left:20px; transform:translateY(-50%);
-  z-index:58; display:flex; flex-direction:column; align-items:center;
-  padding:14px 8px; border-radius:20px;
-  background:rgba(8,15,27,.5);
-  border:1px solid var(--border);
-  backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2);
-  box-shadow:0 16px 40px rgba(0,0,10,.4);
-}
-.floorRail-track{
-  position:relative; display:flex; flex-direction:column; align-items:center; gap:26px;
-  padding:4px 0;
-}
-.floorRail-track::before{
-  content:""; position:absolute; top:6px; bottom:6px; left:50%; width:2px; transform:translateX(-50%);
-  background:linear-gradient(180deg, rgba(143,214,255,.08), rgba(143,214,255,.35), rgba(143,214,255,.08));
-}
-.floorRail-car{
-  position:absolute; right:-15px; width:6px; height:6px; border-radius:50%;
-  background:radial-gradient(circle, #fff, var(--sky-light) 45%, var(--sky-deep) 80%);
-  box-shadow:0 0 10px 2px rgba(143,214,255,.75);
-  transition:top .5s cubic-bezier(.4,0,.2,1);
-  top:0;
-}
-.floorStop{
-  position:relative; z-index:2; width:30px; height:30px; border-radius:50%;
-  border:1px solid rgba(143,214,255,.25); background:rgba(6,12,22,.85);
-  color:var(--muted); font-family:"Cairo",sans-serif; font-weight:700; font-size:11px;
-  display:flex; align-items:center; justify-content:center; cursor:pointer;
-  transition:all .3s ease;
-}
-.floorStop:hover{border-color:rgba(143,214,255,.7); color:var(--sky-light);}
-.floorStop.active{
-  color:var(--bg1); background:linear-gradient(160deg, var(--sky-light), var(--sky-deep));
-  box-shadow:0 0 16px rgba(143,214,255,.65);
-  border-color:transparent;
-}
-@media (max-width:1180px){ .floorRail{display:none} }
-
-/* ============ STICKY QUICK NAV (desktop pill / mobile bottom bar) ============ */
-.quickNav{
-  position:fixed;
-  top:16px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:60;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:6px;
-  border-radius:999px;
-  background:rgba(8,15,27,.55);
-  border:1px solid var(--border);
-  backdrop-filter:blur(18px) saturate(1.3);
-  -webkit-backdrop-filter:blur(18px) saturate(1.3);
-  box-shadow:0 14px 34px rgba(0,0,10,.4);
-  transition:transform .35s ease, opacity .35s ease, box-shadow .3s ease;
-}
-.quickNav.compact{
-  box-shadow:0 14px 34px rgba(0,0,10,.55), 0 0 0 1px rgba(143,214,255,.12);
-}
-.quickNav .navItem{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  padding:9px 16px;
-  border-radius:999px;
-  color:var(--muted);
-  text-decoration:none;
-  font-size:13.5px;
-  font-weight:700;
-  white-space:nowrap;
-  transition:background .25s ease, color .25s ease;
-}
-.quickNav .navItem svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
-.quickNav .navItem.active{
-  background:linear-gradient(160deg, rgba(143,214,255,.22), rgba(143,214,255,.08));
-  color:var(--ivory);
-  box-shadow:inset 0 0 0 1px rgba(143,214,255,.35);
-}
-.quickNav .navItem:hover{color:var(--sky-light);}
-
-@media (max-width:760px){
-  .quickNav{
-    top:auto;
-    bottom:0;
-    left:0;
-    right:0;
-    transform:none;
-    border-radius:0;
-    border:none;
-    border-top:1px solid var(--border);
-    justify-content:space-between;
-    padding:8px 10px calc(8px + env(safe-area-inset-bottom));
-    background:rgba(5,10,20,.94);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-  }
-  .quickNav .navItem{
-    flex-direction:column;
-    gap:4px;
-    padding:6px 8px;
-    font-size:10.5px;
-    flex:1;
-    justify-content:center;
-    text-align:center;
-    border-radius:12px;
-  }
-  .quickNav .navItem svg{width:19px;height:19px;}
-}
-
-/* back to top */
-.toTop{
-  position:fixed;
-  bottom:86px;
-  left:18px;
-  z-index:55;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(8,15,27,.6);
-  border:1px solid var(--border);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  color:var(--sky-light);
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(10px);
-  transition:opacity .3s ease, transform .3s ease;
-  box-shadow:0 10px 26px rgba(0,0,10,.4);
-}
-.toTop.show{opacity:1; pointer-events:auto; transform:translateY(0);}
-.toTop svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
-@media (max-width:760px){ .toTop{bottom:78px; left:14px; width:40px; height:40px; backdrop-filter:none; -webkit-backdrop-filter:none; background:rgba(6,12,22,.92);} }
-@media (min-width:761px){ .toTop{bottom:24px;} }
-@media (max-width:1180px) and (min-width:761px){ .toTop{left:18px;} }
-
-.hero{
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:30px 16px 42px;
-  isolation:isolate;
-  scroll-margin-top:20px;
-}
-
-.bgVideo{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-4;
-  pointer-events:none;
-  filter:brightness(.45) saturate(.8) contrast(1.08) hue-rotate(-6deg);
-  transform:scale(1.05);
-}
-.bgVideo::-webkit-media-controls{display:none !important;}
-
-.bgVideoFrame{
-  position:absolute;
-  inset:22px 22px auto auto;
-  width:min(320px, 34vw);
-  aspect-ratio:16/9;
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
-  box-shadow:0 24px 60px rgba(0,0,10,.5);
-  backdrop-filter:blur(16px) saturate(1.1);
-  -webkit-backdrop-filter:blur(16px) saturate(1.1);
-  z-index:2;
-  animation:floatCard 6s ease-in-out infinite;
-}
-.bgVideoFrame::before{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(255,255,255,.10), transparent 30%, transparent 70%, rgba(0,0,15,.35));
-  pointer-events:none; z-index:2;
-}
-.bgVideoFrame video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) brightness(.94);}
-.bgVideoLabel{
-  position:absolute; inset:auto 12px 12px auto; z-index:3;
-  padding:6px 13px; border-radius:999px;
-  background:rgba(3,7,15,.55); border:1px solid var(--border);
-  color:var(--sky-light); font-size:11px; font-weight:800; letter-spacing:1.5px;
-  backdrop-filter:blur(8px);
-}
-@keyframes floatCard{
-  0%,100%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-8px) rotate(-.3deg)}
-}
-
-/* Performance: strip heavy video + effects on small/low-power screens */
-@media (max-width:760px){
-  .bgVideo, .bgVideoFrame, .rings, .particles, .aiCanvas, .scanBeam{display:none !important;}
-  .hero::before{
-    background:
-      radial-gradient(circle at 20% 10%, rgba(143,214,255,.16), transparent 30%),
-      radial-gradient(circle at 85% 70%, rgba(61,143,208,.14), transparent 34%),
-      linear-gradient(180deg, #03060d, #081527 60%, #050d1a);
-  }
-  .flares span{filter:blur(20px); animation:none; opacity:.16;}
-  .flares span:nth-child(3), .flares span:nth-child(4){display:none;}
-  body::before, body::after{animation:none; filter:blur(60px); opacity:.12;}
-  .grain{display:none;}
-  .logo::before{animation:none;}
-  .gradientTitle{animation:none; background-position:0% 50%;}
-  .edgeGlow{animation:none; opacity:.28;}
-  .miniBadge i{animation:none;}
-  .heroVideoBadge{animation:fadeUp .9s ease both;}
-  .btn, .iconBtn, .locationBtn, .pinIcon{
-    backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
-    background:linear-gradient(160deg, rgba(18,32,52,.85), rgba(10,20,34,.85));
-  }
-  .btn::before, .iconBtn::before, .locationBtn::before{display:none;}
-  .btn:hover, .iconBtn:hover, .locationBtn:hover{transform:none;}
-}
-
-.hero::before{
-  content:"";
-  position:absolute; inset:0;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(143,214,255,.16), transparent 22%),
-    radial-gradient(circle at 85% 12%, rgba(215,241,255,.10), transparent 24%),
-    linear-gradient(180deg, rgba(3,6,13,.55), rgba(5,10,20,.78) 46%, rgba(3,5,10,.94));
-  z-index:-3;
-}
-.hero::after{
-  content:"";
-  position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(143,214,255,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(143,214,255,.06) 1px, transparent 1px);
-  background-size:52px 52px;
-  mask-image:linear-gradient(180deg, rgba(255,255,255,.35), transparent 72%);
-  z-index:-2;
-  opacity:.4;
-}
-
-.flares, .particles, .rings{position:absolute; inset:0; pointer-events:none;}
-.flares span{
-  position:absolute; width:180px; height:180px; border-radius:50%;
-  background:radial-gradient(circle, rgba(215,241,255,.6), rgba(143,214,255,.16) 30%, transparent 68%);
-  filter:blur(14px); opacity:.22;
-  animation:pulseFlash 7s ease-in-out infinite;
-}
-.flares span:nth-child(1){top:10%; left:9%; animation-delay:0s;}
-.flares span:nth-child(2){top:18%; right:12%; width:220px; height:220px; animation-delay:1.5s;}
-.flares span:nth-child(3){bottom:18%; left:20%; width:140px; height:140px; animation-delay:3s;}
-.flares span:nth-child(4){bottom:12%; right:18%; width:170px; height:170px; animation-delay:4.5s;}
-@keyframes pulseFlash{
-  0%,100%{transform:scale(.86); opacity:.12}
-  50%{transform:scale(1.1); opacity:.28}
-}
-
-.particles span{
-  position:absolute; display:block; width:4px; height:4px; border-radius:50%;
-  background:radial-gradient(circle, rgba(255,255,255,.95), rgba(143,214,255,.3) 55%, transparent 75%);
-  box-shadow:0 0 12px rgba(143,214,255,.5);
-  opacity:.35; animation:flyUp linear infinite;
-}
-@keyframes flyUp{
-  0%{transform:translateY(20px) scale(.75); opacity:0}
-  10%{opacity:.3} 50%{opacity:.6}
-  100%{transform:translateY(-115vh) scale(1.1); opacity:0}
-}
-
-.rings span{position:absolute; border:1px solid rgba(143,214,255,.12); border-radius:50%; animation:rotateRing 20s linear infinite;}
-.rings span:nth-child(1){width:420px; height:420px; top:8%; right:-120px;}
-.rings span:nth-child(2){width:300px; height:300px; bottom:12%; left:-80px; animation-direction:reverse;}
-.rings span:nth-child(3){width:180px; height:180px; top:32%; left:8%; opacity:.5;}
-@keyframes rotateRing{from{transform:rotate(0deg)} to{transform:rotate(360deg)}}
-
-.container{position:relative; z-index:2; width:100%; max-width:1180px; margin:auto;}
-
-.heroVideoBadge{
-  width:max-content; margin:0 auto 18px; padding:10px 20px; border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  border:1px solid var(--border);
-  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 14px 34px rgba(0,0,10,.35);
-  color:var(--sky-light); font-size:12px; font-weight:800; letter-spacing:3px;
-  animation:fadeUp .9s ease both, badgePulse 4s ease-in-out infinite;
-}
-@keyframes badgePulse{
-  0%,100%{transform:translateY(0); box-shadow:0 14px 34px rgba(0,0,10,.35)}
-  50%{transform:translateY(-3px); box-shadow:0 20px 44px rgba(0,0,10,.4)}
-}
-
-.topBox{text-align:center; margin-bottom:26px; animation:fadeUp .9s ease both;}
-
-.logo{
-  width:98px; height:98px; margin:0 auto 18px; border-radius:28px; position:relative;
+/* ============ HEADER ============ */
+header{position:sticky; top:0; z-index:100; background:rgba(255,255,255,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+.headerRow{display:flex; align-items:center; justify-content:space-between; gap:24px; height:82px;}
+.brand{display:flex; align-items:center; gap:12px;}
+.brandMark{
+  width:44px; height:44px; border-radius:50%; flex-shrink:0; position:relative;
+  background:radial-gradient(circle at 32% 28%, var(--blue-light), var(--navy-900) 72%);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.5), 0 6px 14px -4px rgba(11,41,71,.5);
   display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
-  border:1px solid var(--border);
-  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  box-shadow:var(--shadowStrong);
-  animation:logoBreathe 5s ease-in-out infinite;
 }
-.logo::before{
-  content:""; position:absolute; inset:-1px; border-radius:inherit;
-  background:conic-gradient(from 160deg, rgba(143,214,255,.75), rgba(215,241,255,.4), rgba(61,143,208,.55), rgba(143,214,255,.75));
-  z-index:-1; filter:blur(9px); opacity:.55;
-  animation:logoRing 8s linear infinite;
-}
-@keyframes logoRing{from{filter:blur(9px) hue-rotate(0deg)} to{filter:blur(9px) hue-rotate(360deg)}}
-@keyframes logoBreathe{
-  0%,100%{box-shadow:var(--shadowStrong)}
-  50%{box-shadow:var(--shadowStrong), 0 0 34px rgba(143,214,255,.25)}
-}
-.logo img{width:82%; height:82%; object-fit:contain; filter:drop-shadow(0 2px 10px rgba(0,0,10,.5));}
+.brandMark svg{width:22px; height:22px;}
+.brandText{display:flex; flex-direction:column; line-height:1.2;}
+.brandText b{font-family:"Cairo",sans-serif; font-weight:800; font-size:19px; letter-spacing:.2px; color:var(--navy-900);}
+.brandText span{font-size:10.5px; font-weight:600; letter-spacing:.6px; color:var(--muted); margin-top:2px;}
 
-.miniBadge{
-  display:inline-flex; align-items:center; gap:10px; padding:10px 18px; margin-bottom:16px;
-  border-radius:999px; background:rgba(255,255,255,.05); border:1px solid var(--border);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  box-shadow:0 12px 30px rgba(0,0,10,.3);
-  color:var(--muted); font-weight:800; font-size:14px;
-}
-.miniBadge i{
-  width:9px; height:9px; border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, var(--sky-light), var(--sky-deep));
-  box-shadow:0 0 12px rgba(143,214,255,.75); display:block;
-  animation:ledBlink 2.4s ease-in-out infinite;
-}
-@keyframes ledBlink{0%,100%{opacity:1} 50%{opacity:.45}}
+nav.mainNav{display:flex; align-items:center; gap:28px;}
+nav.mainNav a{font-size:14px; font-weight:700; color:#3b4a5a; padding:8px 2px; position:relative; transition:color .2s ease;}
+nav.mainNav a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:2px; border-radius:2px; background:var(--blue); transform:scaleX(0); transition:transform .3s ease;}
+nav.mainNav a:hover, nav.mainNav a.active{color:var(--blue);}
+nav.mainNav a:hover::after, nav.mainNav a.active::after{transform:scaleX(1);}
 
-h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; text-shadow:0 10px 35px rgba(0,0,10,.5);}
-.gradientTitle{
-  background:linear-gradient(90deg,#ffffff 0%,#d7f1ff 35%,#8fd6ff 65%,#ffffff 100%);
-  background-size:220% auto;
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  animation:titleSheen 7s linear infinite;
-}
-@keyframes titleSheen{
-  0%{background-position:0% 50%}
-  100%{background-position:220% 50%}
-}
-.subtitle{margin:14px 0 0; font-size:clamp(15px,2vw,20px); color:var(--muted); font-weight:500;}
+.headerActions{display:flex; align-items:center; gap:16px;}
+.quoteBtn{display:inline-flex; align-items:center; gap:8px; background:var(--navy-900); color:#fff; font-size:13.5px; font-weight:700; padding:12px 20px; border-radius:999px; transition:all .25s ease; box-shadow:0 10px 20px -8px rgba(11,41,71,.5);}
+.quoteBtn:hover{background:var(--blue); transform:translateY(-2px); box-shadow:0 14px 26px -8px rgba(31,111,214,.55);}
+.quoteBtn svg{width:14px; height:14px;}
+.langSel{display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#3b4a5a; cursor:pointer;}
+.langSel svg{width:12px; height:12px;}
+.menuToggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+.menuToggle span{width:24px; height:2px; background:var(--navy-900); border-radius:2px;}
+.mobilePanel{display:none; position:fixed; inset:82px 0 0 0; z-index:99; background:#fff; padding:24px 32px; flex-direction:column; gap:6px; overflow-y:auto;}
+.mobilePanel a{padding:14px 4px; font-size:15px; font-weight:700; color:var(--navy-900); border-bottom:1px solid var(--line);}
+.mobilePanel.open{display:flex;}
+@media (max-width:980px){ nav.mainNav{display:none;} .menuToggle{display:flex;} .headerActions .langSel{display:none;} }
 
-.portalCard{
-  position:relative; overflow:hidden;
-  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  border:1px solid var(--border); border-radius:30px; padding:26px;
-  backdrop-filter:blur(24px) saturate(1.1); -webkit-backdrop-filter:blur(24px) saturate(1.1);
-  box-shadow:var(--shadowStrong);
-  animation:fadeUp 1s ease .1s both;
-}
-.portalCard::before{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(135deg, rgba(255,255,255,.07), transparent 20%, transparent 70%, rgba(143,214,255,.05));
-  pointer-events:none;
-}
-.portalCard::after{
-  content:""; position:absolute; top:0; left:0; right:0; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(143,214,255,.65), transparent);
-}
-/* slow rotating light tracing the card edge — reads as an active AI system, not decoration for its own sake */
-.edgeGlow{
-  position:absolute; inset:-1px; border-radius:inherit; z-index:0; pointer-events:none;
-  padding:1px; -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor; mask-composite:exclude;
-  background:conic-gradient(from 0deg, transparent 0%, rgba(143,214,255,.9) 8%, transparent 20%, transparent 80%, rgba(215,241,255,.55) 92%, transparent 100%);
-  opacity:.6;
-  animation:edgeSpin 6s linear infinite;
-}
-@keyframes edgeSpin{to{transform:rotate(360deg)}}
+/* ============ HERO ============ */
+.hero{padding:64px 0 0; position:relative; overflow:hidden;}
+.heroGrid{display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center;}
+.kicker{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; letter-spacing:.5px; color:var(--blue); margin-bottom:16px;}
+.kicker::before{content:""; width:26px; height:2px; background:var(--blue); border-radius:2px;}
+.heroTitle{font-size:clamp(32px,4.2vw,52px); font-weight:900; line-height:1.18;}
+.heroTitle .l1{color:var(--navy-900); display:block;}
+.heroTitle .l2{display:block; margin-top:4px; background:linear-gradient(95deg, var(--blue) 10%, var(--blue-light) 55%, var(--blue) 100%); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.heroText{margin:22px 0 30px; font-size:15.5px; line-height:1.9; color:var(--muted); max-width:480px;}
+.heroCtas{display:flex; gap:14px; flex-wrap:wrap;}
+.btnPrimary, .btnGhost{display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:700; padding:15px 26px; border-radius:12px; transition:all .25s ease;}
+.btnPrimary{background:var(--navy-900); color:#fff; box-shadow:0 14px 26px -10px rgba(11,41,71,.55);}
+.btnPrimary:hover{background:var(--blue); transform:translateY(-3px); box-shadow:0 18px 30px -10px rgba(31,111,214,.5);}
+.btnGhost{background:#fff; color:var(--navy-900); border:1.5px solid #d7e0ea;}
+.btnGhost:hover{border-color:var(--blue); color:var(--blue); transform:translateY(-3px);}
+.btnPrimary svg, .btnGhost svg{width:14px; height:14px; transition:transform .25s ease;}
+.btnPrimary:hover svg, .btnGhost:hover svg{transform:translateX(-3px);}
 
-.section{scroll-margin-top:calc(var(--nav-h) + 14px);}
-.section + .section{margin-top:32px}
-.sectionHeader{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:18px;}
-.sectionTitle{position:relative; display:flex; align-items:center; gap:12px; font-size:19px; font-weight:800; padding-inline-start:16px; color:var(--ivory);}
-.sectionTitle::before{
-  content:""; position:absolute; inset-inline-start:0; top:50%; transform:translateY(-50%);
-  width:5px; height:22px; border-radius:999px;
-  background:linear-gradient(180deg,var(--sky-light),var(--sky-deep));
-  box-shadow:0 0 14px rgba(143,214,255,.55);
-}
-.floorTag{
-  font-family:"Cairo",sans-serif; font-size:11px; font-weight:800; letter-spacing:1.5px;
-  color:var(--bg1); background:linear-gradient(160deg,var(--sky-light),var(--sky-deep));
-  padding:3px 9px; border-radius:7px; box-shadow:0 4px 12px rgba(143,214,255,.25);
-}
-.divider{flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(143,214,255,.34), transparent);}
+.heroVisual{position:relative; border-radius:26px; overflow:hidden; aspect-ratio:6/5.1; background:linear-gradient(180deg, #eef4fb 0%, #dbe8f5 42%, #c3d7ec 68%, #a9c5e0 100%); box-shadow:var(--shadow);}
+.skyline{position:absolute; inset:0 0 auto 0; height:46%; display:flex; align-items:flex-end; opacity:.5;}
+.skyline i{display:block; flex:none; background:linear-gradient(180deg, var(--navy-800), var(--navy-950)); opacity:.14; border-radius:2px 2px 0 0;}
+.floor{position:absolute; inset:auto 0 0 0; height:30%; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(120,150,180,.35));}
+.floor::before{content:""; position:absolute; inset:0; background-image:repeating-linear-gradient(100deg, rgba(255,255,255,.35) 0 2px, transparent 2px 90px); opacity:.5;}
+.cabin{position:absolute; left:50%; bottom:16%; transform:translateX(-50%); width:46%; aspect-ratio:2/2.7; border-radius:14px 14px 4px 4px; overflow:hidden; background:linear-gradient(160deg, rgba(255,255,255,.55), rgba(179,206,232,.35)); box-shadow:0 30px 60px -20px rgba(11,41,71,.45), inset 0 0 0 1.5px rgba(255,255,255,.6); animation:cabinFloat 6s ease-in-out infinite;}
+@keyframes cabinFloat{0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)}}
+.cabin::before{content:""; position:absolute; top:0; left:0; right:0; height:14%; background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,0));}
+.cabin .mullion{position:absolute; top:0; bottom:0; width:2px; background:rgba(11,41,71,.18);}
+.cabin .m1{left:33%} .cabin .m2{left:66%}
+.cabin .glow{position:absolute; top:10%; left:50%; transform:translateX(-50%); width:70%; height:16%; background:radial-gradient(ellipse at center, rgba(255,255,255,.9), transparent 70%); filter:blur(4px);}
+.heroBadge{position:absolute; top:22px; right:22px; padding:9px 16px; border-radius:999px; background:rgba(255,255,255,.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); font-size:11px; font-weight:700; letter-spacing:.6px; color:var(--navy-900); box-shadow:0 8px 18px -8px rgba(11,41,71,.35);}
 
-.buttons{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;}
-
-.btn, .iconBtn, .locationBtn{
-  position:relative; overflow:hidden; text-decoration:none; color:var(--ivory);
-  background:linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  backdrop-filter:blur(18px) saturate(1.3); -webkit-backdrop-filter:blur(18px) saturate(1.3);
-  border:1px solid rgba(143,214,255,.22);
-  box-shadow:0 1px 0 rgba(255,255,255,.14) inset, 0 -1px 0 rgba(0,0,10,.25) inset, 0 16px 34px rgba(0,0,10,.35);
-  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease, border-color .25s ease;
-  transform-style:preserve-3d; will-change:transform;
-}
-.btn::before, .iconBtn::before, .locationBtn::before{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(115deg, transparent 25%, rgba(255,255,255,.20) 46%, transparent 66%);
-  transform:translateX(-145%); transition:transform 1s ease;
-}
-.btn::after, .iconBtn::after, .locationBtn::after{
-  content:""; position:absolute; inset:0; border-radius:inherit;
-  background:linear-gradient(180deg, rgba(255,255,255,.18), transparent 34%);
-  pointer-events:none;
-}
-/* elevator cabin LED — glows on hover, tiny signal light in the corner */
-.btn .ledDot, .iconBtn .ledDot, .locationBtn .ledDot{
-  position:absolute; top:12px; inset-inline-end:12px; width:6px; height:6px; border-radius:50%;
-  background:rgba(143,214,255,.35); box-shadow:0 0 0 rgba(143,214,255,0);
-  transition:all .3s ease; z-index:2;
-}
-.btn:hover .ledDot, .iconBtn:hover .ledDot, .locationBtn:hover .ledDot{
-  background:var(--sky-light); box-shadow:0 0 10px 2px rgba(143,214,255,.8);
-}
-.btn:hover, .iconBtn:hover, .locationBtn:hover{
-  transform:translateY(-6px);
-  border-color:rgba(143,214,255,.6);
-  background:linear-gradient(160deg, rgba(255,255,255,.13), rgba(143,214,255,.06));
-  box-shadow:0 1px 0 rgba(255,255,255,.18) inset, 0 -1px 0 rgba(0,0,10,.3) inset, 0 26px 50px rgba(0,0,10,.45), 0 0 0 1px rgba(143,214,255,.14), 0 0 32px rgba(143,214,255,.18);
-}
-.btn:hover::before, .iconBtn:hover::before, .locationBtn:hover::before{transform:translateX(145%)}
-.btn:active, .iconBtn:active, .locationBtn:active{
-  transform:translateY(-1px) scale(.98);
-  box-shadow:0 1px 0 rgba(255,255,255,.12) inset, 0 10px 22px rgba(0,0,10,.35);
-}
-.btn.pressed, .iconBtn.pressed, .locationBtn.pressed{animation:pressFlash .5s ease;}
-@keyframes pressFlash{0%{filter:brightness(1)} 35%{filter:brightness(1.25)} 100%{filter:brightness(1)}}
-
-.ripple{
-  position:absolute; border-radius:50%; transform:scale(0);
-  background:radial-gradient(circle, rgba(255,255,255,.5), rgba(143,214,255,.16) 55%, transparent 72%);
-  animation:ripple .75s ease-out forwards; pointer-events:none;
-}
-@keyframes ripple{to{transform:scale(7); opacity:0}}
-
-.btn{
-  display:flex; align-items:center; justify-content:center; text-align:center;
-  min-height:76px; padding:18px; border-radius:20px;
-  font-size:16.5px; font-weight:700; line-height:1.4; letter-spacing:.2px;
+.quickRail{position:absolute; top:50%; left:-1px; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; border-radius:0 14px 14px 0; overflow:hidden; box-shadow:0 20px 40px -16px rgba(11,41,71,.5);}
+.quickRail a{display:flex; flex-direction:column; align-items:center; gap:5px; width:82px; padding:16px 8px; background:var(--navy-900); color:#fff; font-size:10px; font-weight:700; text-align:center; border-bottom:1px solid rgba(255,255,255,.12); transition:background .25s ease;}
+.quickRail a:last-child{border-bottom:none}
+.quickRail a svg{width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:1.8;}
+.quickRail a:hover{background:var(--blue);}
+@media (max-width:980px){
+  .heroGrid{grid-template-columns:1fr}
+  .quickRail{position:static; transform:none; flex-direction:row; border-radius:14px; margin-top:18px; width:100%;}
+  .quickRail a{flex:1; width:auto; border-bottom:none; border-inline-start:1px solid rgba(255,255,255,.12);}
+  .quickRail a:first-child{border-inline-start:none}
 }
 
-.iconGrid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px;}
-.iconBtn{
-  min-height:62px; padding:14px 10px; border-radius:16px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:14.5px; font-weight:700; color:var(--muted);
-}
-.iconBtn:hover{color:var(--sky-light)}
+/* ============ DARK CATEGORY BAND ============ */
+.catBand{position:relative; z-index:6; margin:-64px auto 0; max-width:1176px; padding:0 32px;}
+.catInner{background:linear-gradient(120deg, var(--navy-900), var(--navy-800) 70%); border-radius:22px; padding:44px 12px; box-shadow:0 30px 60px -20px rgba(11,41,71,.5); display:grid; grid-template-columns:repeat(4,1fr);}
+.catCol{padding:6px 26px; position:relative; opacity:0; transform:translateY(18px); animation:svcIn .7s ease forwards; cursor:pointer;}
+.catCol:nth-child(1){animation-delay:.05s} .catCol:nth-child(2){animation-delay:.15s} .catCol:nth-child(3){animation-delay:.25s} .catCol:nth-child(4){animation-delay:.35s}
+@keyframes svcIn{to{opacity:1; transform:translateY(0)}}
+.catCol:not(:last-child)::after{content:""; position:absolute; top:6px; bottom:6px; inset-inline-start:0; width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,.16), transparent);}
+.catIconBig{width:44px; height:44px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:24px;}
+.catCol h3{color:#fff; font-size:16.5px; font-weight:800; margin-bottom:8px;}
+.catCol p{color:rgba(226,236,247,.72); font-size:13px; line-height:1.7; margin-bottom:14px;}
+.learnMore{display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; color:var(--sky);}
+.learnMore svg{width:12px; height:12px; transition:transform .25s ease;}
+.catCol:hover .learnMore svg{transform:translateX(-4px);}
+@media (max-width:900px){ .catInner{grid-template-columns:repeat(2,1fr); row-gap:26px;} .catCol:nth-child(2)::after{display:none} }
+@media (max-width:560px){ .catInner{grid-template-columns:1fr; padding:8px;} .catCol{padding:22px;} .catCol::after{display:none !important} }
 
-.locationGrid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;}
-.locationBtn{
-  min-height:132px; padding:18px 12px; border-radius:20px;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-}
-.pinIcon{
-  width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-  border:1px solid rgba(143,214,255,.3);
-  box-shadow:0 12px 26px rgba(0,0,10,.3), 0 0 16px rgba(143,214,255,.14) inset;
-  transition:box-shadow .3s ease;
-}
-.locationBtn:hover .pinIcon{box-shadow:0 12px 26px rgba(0,0,10,.3), 0 0 20px rgba(143,214,255,.4) inset, 0 0 22px rgba(143,214,255,.35);}
-.pinIcon svg{width:24px; height:24px; fill:var(--sky-light); filter:drop-shadow(0 0 6px rgba(143,214,255,.4));}
-.locationOffice{font-size:12.5px; color:var(--muted); font-weight:500; letter-spacing:.4px}
-.locationName{font-size:16.5px; font-weight:800; color:var(--ivory)}
-.footerNote{text-align:center; margin-top:24px; margin-bottom:70px; font-size:13px; color:rgba(238,246,255,.5); letter-spacing:.5px;}
+/* ============ CONTENT SECTIONS ============ */
+.section{padding:96px 0 8px; scroll-margin-top:100px;}
+.sectionHead{max-width:640px; margin:0 auto 46px; text-align:center;}
+.sectionHead h2{font-size:clamp(24px,3vw,32px); font-weight:800; color:var(--navy-900); margin-top:12px;}
+.sectionHead p{color:var(--muted); font-size:14.5px; margin-top:12px; line-height:1.8;}
 
-.reveal{opacity:0; transform:translateY(24px) scale(.985)}
-.reveal.show{animation:fadeUp .8s ease forwards}
-@keyframes fadeUp{from{opacity:0; transform:translateY(24px) scale(.985)} to{opacity:1; transform:translateY(0) scale(1)}}
-
-@media (min-width:761px){ .footerNote{margin-bottom:24px;} }
-
-@media (max-width:992px){
-  .buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .iconGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .locationGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cardGrid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.linkCard{
+  display:flex; align-items:center; gap:14px; padding:18px 18px; border-radius:16px;
+  background:#fff; border:1px solid var(--line); box-shadow:0 8px 20px -14px rgba(11,41,71,.25);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
 }
-
-@media (max-width:768px){
-  .hero{padding:20px 12px 30px}
-  .portalCard{padding:16px; border-radius:22px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
-  .logo{width:80px; height:80px; border-radius:20px}
-  h1{font-size:30px; line-height:1.32}
-  .subtitle{font-size:16px}
-  .sectionTitle{font-size:16px}
-  .buttons{grid-template-columns:1fr; gap:12px}
-  .btn{min-height:64px; font-size:15.5px; padding:14px 16px; border-radius:16px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
-  .iconGrid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
-  .iconBtn{min-height:54px; font-size:14px; border-radius:14px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
-  .locationGrid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
-  .locationBtn{min-height:110px; border-radius:16px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
-  .locationName{font-size:14.5px}
-  .locationOffice{font-size:12px}
+.linkCard:hover{transform:translateY(-5px); border-color:#cfe0f2; box-shadow:0 20px 34px -16px rgba(11,41,71,.35);}
+.chip{
+  flex-shrink:0; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+  font-size:20px; background:linear-gradient(150deg, var(--blue-light), var(--navy-900) 85%);
+  box-shadow:0 8px 16px -6px rgba(11,41,71,.4), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
 }
+.linkCard:hover .chip{transform:rotate(-8deg) scale(1.08);}
+.linkLabel{font-size:14px; font-weight:700; color:var(--navy-900); line-height:1.4;}
 
-@media (max-width:480px){
-  h1{font-size:26px}
-  .subtitle{font-size:14px}
-  .miniBadge{font-size:12.5px; padding:9px 12px}
+@media (max-width:1080px){ .cardGrid{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:760px){ .cardGrid{grid-template-columns:repeat(2,1fr); gap:12px;} .linkCard{padding:14px;} .section{padding:64px 0 8px;} .linkLabel{font-size:12.5px;} .chip{width:38px;height:38px;font-size:17px;border-radius:11px;} }
+@media (max-width:460px){ .cardGrid{grid-template-columns:1fr;} }
+
+.soft{background:var(--bg-soft);}
+
+/* ============ CONTACT DARK BAND ============ */
+.contactBand{background:linear-gradient(120deg, var(--navy-900), var(--navy-950)); padding:80px 0; margin-top:20px;}
+.contactBand .sectionHead h2, .contactBand .sectionHead p{color:#fff;}
+.contactBand .sectionHead p{color:rgba(226,236,247,.72);}
+.iconGrid{display:grid; grid-template-columns:repeat(6,1fr); gap:14px;}
+.iconCard{
+  display:flex; flex-direction:column; align-items:center; gap:10px; padding:20px 10px; border-radius:16px;
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
 }
+.iconCard:hover{background:rgba(255,255,255,.1); border-color:rgba(143,214,255,.4); transform:translateY(-5px);}
+.iconCard .chip{background:linear-gradient(150deg, var(--sky), var(--blue) 85%);}
+.iconCard span.lbl{font-size:11.5px; font-weight:700; color:#fff;}
+@media (max-width:900px){ .iconGrid{grid-template-columns:repeat(4,1fr);} }
+@media (max-width:560px){ .iconGrid{grid-template-columns:repeat(3,1fr); gap:10px;} .iconCard{padding:14px 6px;} }
+
+/* ============ LOCATIONS ============ */
+.locGrid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.locCard{
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; padding:30px 16px;
+  border-radius:18px; background:#fff; border:1px solid var(--line); box-shadow:0 8px 20px -14px rgba(11,41,71,.25);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+}
+.locCard:hover{transform:translateY(-6px); box-shadow:0 22px 38px -16px rgba(11,41,71,.35); border-color:#cfe0f2;}
+.locPin{width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg, var(--blue-light), var(--navy-900) 85%); box-shadow:0 10px 20px -8px rgba(11,41,71,.4);}
+.locPin svg{width:24px; height:24px; fill:#fff;}
+.locOffice{font-size:12px; color:var(--muted); font-weight:600;}
+.locName{font-size:16.5px; font-weight:800; color:var(--navy-900);}
+.locLink{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--blue); margin-top:4px;}
+.locLink svg{width:11px; height:11px; transition:transform .25s ease;}
+.locCard:hover .locLink svg{transform:translateX(-3px);}
+@media (max-width:900px){ .locGrid{grid-template-columns:repeat(2,1fr);} }
+
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.show{opacity:1; transform:translateY(0);}
+
+/* ============ FOOTER ============ */
+footer{background:var(--navy-950); color:rgba(226,236,247,.7); padding:52px 0 26px; margin-top:40px;}
+.footRow{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; padding-bottom:26px; border-bottom:1px solid rgba(255,255,255,.08);}
+.footBrand{display:flex; align-items:center; gap:12px;}
+.footBrand b{color:#fff; font-family:"Cairo",sans-serif; font-weight:800; font-size:16px;}
+.footSocial{display:flex; gap:10px;}
+.footSocial a{width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); transition:all .25s ease;}
+.footSocial a svg{width:15px; height:15px; stroke:#fff; fill:none; stroke-width:1.6;}
+.footSocial a:hover{background:var(--blue); transform:translateY(-3px);}
+.footBottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; padding-top:20px; font-size:12.5px;}
+
+.backTop{position:fixed; bottom:24px; left:24px; z-index:55; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--navy-900); color:#fff; box-shadow:0 14px 26px -8px rgba(11,41,71,.5); opacity:0; pointer-events:none; transform:translateY(10px); transition:all .3s ease;}
+.backTop.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+.backTop svg{width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2;}
 </style>
 </head>
 <body>
 
-<div class="grain" aria-hidden="true"></div>
-
-<!-- Elevator door intro: opens once on load, then hides itself -->
-<div class="doorIntro" id="doorIntro" aria-hidden="true">
-  <div class="doorPanel doorLeft"><span class="doorMark">S</span></div>
-  <div class="doorPanel doorRight"><span class="doorMark">M</span></div>
-  <div class="doorChime" id="doorChime"></div>
-</div>
-
-<!-- Floor-position rail: decorative elevator indicator that also navigates -->
-<nav class="floorRail" id="floorRail" aria-label="مؤشر الطابق">
-  <div class="floorRail-track">
-    <div class="floorRail-car" id="floorCar"></div>
-    <button class="floorStop" data-target="#hero" title="الرئيسية">G</button>
-    <button class="floorStop" data-target="#decoration" title="الديكورات">1</button>
-    <button class="floorStop" data-target="#documents" title="المستندات">2</button>
-    <button class="floorStop" data-target="#contact" title="التواصل">3</button>
-    <button class="floorStop" data-target="#locations" title="الفروع">PH</button>
+<header>
+  <div class="wrap headerRow">
+    <div class="brand">
+      <div class="brandMark"><svg viewBox="0 0 24 24"><path d="M8 6c0-1.5 1.5-2.5 4-2.5s4 1 4 2.5-1.7 2-4 3-4 1.5-4 3 1.5 2.5 4 2.5 4-1 4-2.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="brandText"><b>SMOU GROUP</b><span>البوابة الرسمية — Corporate Portal</span></div>
+    </div>
+    <nav class="mainNav" aria-label="التنقل الرئيسي">
+      <a href="#hero" class="active">الرئيسية</a>
+      <a href="#decoration">الديكورات</a>
+      <a href="#documents">المستندات</a>
+      <a href="#contact">التواصل</a>
+      <a href="#locations">الفروع</a>
+    </nav>
+    <div class="headerActions">
+      <a class="quoteBtn" href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank">تواصل الآن
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="langSel">AR<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <button class="menuToggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
-</nav>
+</header>
 
-<!-- Quick navigation: sticky pill (desktop) / bottom tab bar (mobile) -->
-<nav class="quickNav" id="quickNav">
-  <a class="navItem" data-target="#hero" href="#hero">
-    <svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5M6 10v9h12v-9"/></svg>
-    <span>الرئيسية</span>
-  </a>
-  <a class="navItem" data-target="#decoration" href="#decoration">
-    <svg viewBox="0 0 24 24"><path d="M4 20 20 4M14 4h6v6M9 20a5 5 0 0 1-5-5"/></svg>
-    <span>الديكورات</span>
-  </a>
-  <a class="navItem" data-target="#documents" href="#documents">
-    <svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7V3Z"/><path d="M14 3v4h4"/></svg>
-    <span>المستندات</span>
-  </a>
-  <a class="navItem" data-target="#contact" href="#contact">
-    <svg viewBox="0 0 24 24"><path d="M4 4h16v13H8l-4 4V4Z"/></svg>
-    <span>التواصل</span>
-  </a>
-  <a class="navItem" data-target="#locations" href="#locations">
-    <svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11.5A7 7 0 0 0 5 9.5C5 14.7 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-    <span>الفروع</span>
-  </a>
+<nav class="mobilePanel" id="mobilePanel" aria-label="قائمة الجوال">
+  <a href="#hero">الرئيسية</a>
+  <a href="#decoration">الديكورات</a>
+  <a href="#documents">المستندات</a>
+  <a href="#contact">التواصل</a>
+  <a href="#locations">الفروع</a>
 </nav>
-
-<button class="toTop" id="toTop" aria-label="العودة للأعلى">
-  <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
 
 <section class="hero" id="hero">
-
-<video class="bgVideo" autoplay muted loop playsinline>
-  <source src="vedio.mp4" type="video/mp4">
-</video>
-
-<canvas class="aiCanvas" id="aiCanvas" aria-hidden="true"></canvas>
-<div class="scanBeam" aria-hidden="true"></div>
-<div class="flares" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-<div class="rings" aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="particles" aria-hidden="true">
-  <span style="left:6%; animation-duration:14s; animation-delay:-2s;"></span>
-  <span style="left:14%; animation-duration:18s; animation-delay:-7s; width:4px; height:4px;"></span>
-  <span style="left:22%; animation-duration:16s; animation-delay:-5s;"></span>
-  <span style="left:31%; animation-duration:19s; animation-delay:-10s; width:5px; height:5px;"></span>
-  <span style="left:42%; animation-duration:15s; animation-delay:-3s;"></span>
-  <span style="left:50%; animation-duration:21s; animation-delay:-8s; width:4px; height:4px;"></span>
-  <span style="left:59%; animation-duration:17s; animation-delay:-6s;"></span>
-  <span style="left:68%; animation-duration:20s; animation-delay:-11s; width:5px; height:5px;"></span>
-  <span style="left:78%; animation-duration:16s; animation-delay:-4s;"></span>
-  <span style="left:89%; animation-duration:14s; animation-delay:-9s;"></span>
-</div>
-
-<div class="container">
-  <div class="heroVideoBadge">SMOU GROUP EXPERIENCE</div>
-  <div class="bgVideoFrame" aria-hidden="true">
-    <video autoplay muted loop playsinline>
-      <source src="vedio.mp4" type="video/mp4">
-    </video>
-    <div class="bgVideoLabel">LIVE PORTAL VIDEO</div>
+  <div class="wrap">
+    <div class="heroGrid">
+      <div>
+        <div class="kicker">بوابة سمو الرسمية</div>
+        <h1 class="heroTitle">
+          <span class="l1">كل ما تحتاجه</span>
+          <span class="l2">في مكان واحد</span>
+        </h1>
+        <p class="heroText">بوابة مجموعة سمو الرقمية تجمع كل الديكورات والكتالوجات والمستندات وقنوات التواصل ومواقع الفروع في تجربة واحدة سريعة ومنظمة.</p>
+        <div class="heroCtas">
+          <a class="btnPrimary" href="#decoration">استكشف الديكورات
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btnGhost" href="#contact">تواصل معنا
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div class="heroVisual">
+          <div class="heroBadge">SMOU GROUP</div>
+          <div class="skyline" aria-hidden="true">
+            <i style="width:6%;height:38%"></i><i style="width:5%;height:55%"></i><i style="width:7%;height:44%"></i>
+            <i style="width:5%;height:70%"></i><i style="width:6%;height:50%"></i><i style="width:8%;height:62%"></i>
+            <i style="width:5%;height:40%"></i><i style="width:6%;height:58%"></i><i style="width:7%;height:48%"></i>
+            <i style="width:5%;height:66%"></i><i style="width:6%;height:36%"></i><i style="width:8%;height:52%"></i>
+          </div>
+          <div class="floor" aria-hidden="true"></div>
+          <div class="cabin" aria-hidden="true"><div class="mullion m1"></div><div class="mullion m2"></div><div class="glow"></div></div>
+        </div>
+        <div class="quickRail">
+          <a href="tel:+971501035499"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg>اتصال</a>
+          <a href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5Z"/></svg>واتساب</a>
+          <a href="mailto:info@smou.ae"><svg viewBox="0 0 24 24"><path d="M4 4h16v13H8l-4 4V4Z"/><path d="m5 6 7 5 7-5"/></svg>إيميل</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="topBox">
-    <div class="logo"><img src="logo.png" alt="SMOU GROUP"></div>
-    <div class="miniBadge"><i></i> بوابة سمو – كل ما تحتاجه في مكان واحد    </div>
-    <h1>
-      <span class="gradientTitle">البوابة الرسمية | مجموعة سمو</span><br>
-      <span class="gradientTitle">Corporate Portal | SMOU GROUP</span>
-    </h1>
-    <p class="subtitle">اختر القسم المطلوب للدخول مباشرة</p>
-  </div>
-
-  <div class="portalCard hud">
-    <span class="edgeGlow"></span>
-    <span class="hudTR"></span>
-    <span class="hudBL"></span>
-
-    <div class="section reveal" id="decoration">
-      <div class="sectionHeader">
-        <div class="sectionTitle"><span class="floorTag">1</span>Decoration — الديكورات</div>
-        <div class="divider"></div>
-      </div>
-      <div class="buttons">
-        <a class="btn fancyBtn" href="https://fuji.smougroup.com/" target="_blank"><span class="ledDot"></span>Fuji Decoration — ديكورات الفوجي</a>
-        <a class="btn fancyBtn" href="https://italy.smougroup.com/" target="_blank"><span class="ledDot"></span>Italian Decoration — ديكورات الإيطالي</a>
-        <a class="btn fancyBtn" href="Cabin Catalouge Fuji.pdf" target="_blank"><span class="ledDot"></span>Fuji Catalogue — كاتلوج الفوجي</a>
-        <a class="btn fancyBtn" href="cataluge- Italy.pdf" target="_blank"><span class="ledDot"></span>Italian Catalogue — كاتلوج الإيطالي</a>
-        <a class="btn fancyBtn" href="./Light.pdf" target="_blank"><span class="ledDot"></span>
-Lighting Guide — دليل الإضاءة
-</a>
-        <a class="btn fancyBtn" href="Marble- collection.pdf" target="_blank"><span class="ledDot"></span>Marble collection —  مجموعة رخام</a>
-<a class="btn fancyBtn" href="https://vedios.smougroup.com/" target="_blank"><span class="ledDot"></span>Project Handover — تسليم المشاريع</a>
-        <a class="btn fancyBtn" href="https://review.smougroup.com/" target="_blank"><span class="ledDot"></span>Client Reviews — آراء العملاء</a>
-
-      </div>
-    </div>
-
-    <div class="section reveal" id="documents">
-      <div class="sectionHeader">
-        <div class="sectionTitle"><span class="floorTag">2</span>Documents — المستندات</div>
-        <div class="divider"></div>
-      </div>
-      <div class="buttons">
-        <a class="btn fancyBtn" href="https://online.pubhtml5.com/gruby/ofcy/" target="_blank"><span class="ledDot"></span>Profile — البروفايل</a>
-        <a class="btn fancyBtn" href="التراخيص والاعتمادات 2026.pdf" target="_blank"><span class="ledDot"></span>Licenses and Approvals — التراخيص والاعتمادات</a>
-        <a class="btn fancyBtn" href="https://family.smougroup.com/" target="_blank"><span class="ledDot"></span>Family list — كشف العائلات</a>
-        <a class="btn fancyBtn" href="https://area.smougroup.com/" target="_blank"><span class="ledDot"></span>Area list — كشف المناطق</a>
-        <a class="btn fancyBtn" href="https://office.smougroup.com/" target="_blank"><span class="ledDot"></span>Companies list — كشف الشركات</a>
-        <a class="btn fancyBtn" href="important.pdf" target="_blank"><span class="ledDot"></span>Importance of Contracting — أهمية التعاقد</a>
-        <a class="btn fancyBtn" href="company comprise.pdf" target="_blank"><span class="ledDot"></span>Company Compare — مقارنة الشركات</a>
-        <a class="btn fancyBtn" href="labor.pdf" target="_blank"><span class="ledDot"></span>Company Manpower List — كشف العمل والعمال</a>
-        <a class="btn fancyBtn" href="Maintinance-list.pdf" target="_blank"><span class="ledDot"></span>Maintenance list — كشف الصيانة</a>
-         <a class="btn fancyBtn" href="imp.pdf" target="_blank"><span class="ledDot"></span>Major Projects — أهم المشاريع</a>
-        <a class="btn fancyBtn" href="fuji-sub-tech.pdf.pdf" target="_blank"><span class="ledDot"></span>TECHNICAL SUBMITTAL Fuji — سابميتال فوجي</a>
-        <a class="btn fancyBtn" href="TECHNICAL SUBMITTAL_ Italy.pdf" target="_blank"><span class="ledDot"></span>Italy Submittal — سابميتال إيطالي</a>
-        <a class="btn fancyBtn" href="ملف الاستدامة المؤسسي.pdf" target="_blank"><span class="ledDot"></span>Sustainability- الاستدامة</a>
-        <a class="btn fancyBtn" href="smart home.pdf" target="_blank"><span class="ledDot"></span>smart home- البيت الذكي</a>
-
-      </div>
-    </div>
-
-    <div class="section reveal" id="contact">
-      <div class="sectionHeader">
-        <div class="sectionTitle"><span class="floorTag">3</span>Contact Links — روابط التواصل</div>
-        <div class="divider"></div>
-      </div>
-      <div class="iconGrid">
-        <a class="iconBtn fancyBtn" href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank"><span class="ledDot"></span>WhatsApp</a>
-        <a class="iconBtn fancyBtn" href="mailto:info@smou.ae" target="_blank"><span class="ledDot"></span>Email</a>
-        <a class="iconBtn fancyBtn" href="https://smoulift.com/" target="_blank"><span class="ledDot"></span>Website</a>
-        <a class="iconBtn fancyBtn" href="https://www.instagram.com/smou.group/" target="_blank"><span class="ledDot"></span>Instagram</a>
-        <a class="iconBtn fancyBtn" href="https://www.facebook.com/smoulift/" target="_blank"><span class="ledDot"></span>Facebook</a>
-        <a class="iconBtn fancyBtn" href="https://www.tiktok.com/@smou.group" target="_blank"><span class="ledDot"></span>TikTok</a>
-        <a class="iconBtn fancyBtn" href="https://x.com/smou_group" target="_blank"><span class="ledDot"></span>X</a>
-        <a class="iconBtn fancyBtn" href="https://www.linkedin.com/in/smou-group-88a5ba18a/" target="_blank"><span class="ledDot"></span>LinkedIn</a>
-        <a class="iconBtn fancyBtn" href="https://www.pinterest.com/SMOUGROUP/" target="_blank"><span class="ledDot"></span>Pinterest</a>
-        <a class="iconBtn fancyBtn" href="https://www.youtube.com/@smou-group/featured" target="_blank"><span class="ledDot"></span>YouTube</a>
-        <a class="iconBtn fancyBtn" href="https://accounts.snapchat.com/v2/welcome" target="_blank"><span class="ledDot"></span>Snapchat</a>
-      </div>
-    </div>
-
-    <div class="section reveal" id="locations">
-      <div class="sectionHeader">
-        <div class="sectionTitle"><span class="floorTag">PH</span>Locations — مواقع فروع الإمارات</div>
-        <div class="divider"></div>
-      </div>
-      <div class="locationGrid">
-        <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/8BQZmvxWvN9CycY26" target="_blank">
-          <span class="ledDot"></span>
-          <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
-          <div class="locationOffice">Branch — فرع</div>
-          <div class="locationName">Dubai — دبي</div>
-        </a>
-        <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/BdN89H2ixf1sw1hz6" target="_blank">
-          <span class="ledDot"></span>
-          <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
-          <div class="locationOffice">Branch — فرع</div>
-          <div class="locationName">Abu Dhabi — أبوظبي</div>
-        </a>
-        <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/6YnUf5W5Bn8LRvMN7" target="_blank">
-          <span class="ledDot"></span>
-          <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
-          <div class="locationOffice">Branch — فرع</div>
-          <div class="locationName">Al Ain — العين</div>
-        </a>
-        <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/hS98r6hN2Bytv4Ex9" target="_blank">
-          <span class="ledDot"></span>
-          <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
-          <div class="locationOffice">Branch — فرع</div>
-          <div class="locationName">Sharjah — الشارقة</div>
-        </a>
-      </div>
-    </div>
-
-    <div class="footerNote">SMOU GROUP © Corporate Portal</div>
-  </div>
-</div>
 </section>
 
+<div class="catBand">
+  <div class="catInner">
+    <a class="catCol" href="#decoration">
+      <div class="catIconBig">🎨</div>
+      <h3>الديكورات</h3>
+      <p>ديكورات الفوجي والإيطالي، الكتالوجات، ومجموعة الرخام.</p>
+      <span class="learnMore">عرض الكل <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="catCol" href="#documents">
+      <div class="catIconBig">📁</div>
+      <h3>المستندات</h3>
+      <p>التراخيص، البروفايل، السابميتال، وكل الملفات الرسمية.</p>
+      <span class="learnMore">عرض الكل <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="catCol" href="#contact">
+      <div class="catIconBig">💬</div>
+      <h3>التواصل</h3>
+      <p>واتساب، إيميل، ومنصات التواصل الاجتماعي الرسمية.</p>
+      <span class="learnMore">عرض الكل <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="catCol" href="#locations">
+      <div class="catIconBig">📍</div>
+      <h3>الفروع</h3>
+      <p>مواقع فروعنا في دبي، أبوظبي، العين، والشارقة.</p>
+      <span class="learnMore">عرض الكل <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+</div>
+
+<section class="section" id="decoration">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="kicker" style="justify-content:center;">Decoration</div>
+      <h2>الديكورات</h2>
+      <p>تصفح ديكورات الفوجي والإيطالي، الكتالوجات، ودليل الإضاءة والرخام.</p>
+    </div>
+    <div class="cardGrid reveal">
+      <a class="linkCard" href="https://fuji.smougroup.com/" target="_blank"><span class="chip">🗻</span><span class="linkLabel">Fuji Decoration — ديكورات الفوجي</span></a>
+      <a class="linkCard" href="https://italy.smougroup.com/" target="_blank"><span class="chip">🏛️</span><span class="linkLabel">Italian Decoration — ديكورات الإيطالي</span></a>
+      <a class="linkCard" href="Cabin Catalouge Fuji.pdf" target="_blank"><span class="chip">📘</span><span class="linkLabel">Fuji Catalogue — كاتلوج الفوجي</span></a>
+      <a class="linkCard" href="cataluge- Italy.pdf" target="_blank"><span class="chip">📗</span><span class="linkLabel">Italian Catalogue — كاتلوج الإيطالي</span></a>
+      <a class="linkCard" href="./Light.pdf" target="_blank"><span class="chip">💡</span><span class="linkLabel">Lighting Guide — دليل الإضاءة</span></a>
+      <a class="linkCard" href="Marble- collection.pdf" target="_blank"><span class="chip">🪨</span><span class="linkLabel">Marble collection — مجموعة رخام</span></a>
+      <a class="linkCard" href="https://vedios.smougroup.com/" target="_blank"><span class="chip">🎬</span><span class="linkLabel">Project Handover — تسليم المشاريع</span></a>
+      <a class="linkCard" href="https://review.smougroup.com/" target="_blank"><span class="chip">⭐</span><span class="linkLabel">Client Reviews — آراء العملاء</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="documents">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="kicker" style="justify-content:center;">Documents</div>
+      <h2>المستندات</h2>
+      <p>كل الملفات الرسمية: التراخيص، البروفايل، السابميتال، وكشوفات العمل والمشاريع.</p>
+    </div>
+    <div class="cardGrid reveal">
+      <a class="linkCard" href="https://online.pubhtml5.com/gruby/ofcy/" target="_blank"><span class="chip">📄</span><span class="linkLabel">Profile — البروفايل</span></a>
+      <a class="linkCard" href="التراخيص والاعتمادات 2026.pdf" target="_blank"><span class="chip">📜</span><span class="linkLabel">Licenses and Approvals — التراخيص والاعتمادات</span></a>
+      <a class="linkCard" href="https://family.smougroup.com/" target="_blank"><span class="chip">👨‍👩‍👧‍👦</span><span class="linkLabel">Family list — كشف العائلات</span></a>
+      <a class="linkCard" href="https://area.smougroup.com/" target="_blank"><span class="chip">📍</span><span class="linkLabel">Area list — كشف المناطق</span></a>
+      <a class="linkCard" href="https://office.smougroup.com/" target="_blank"><span class="chip">🏢</span><span class="linkLabel">Companies list — كشف الشركات</span></a>
+      <a class="linkCard" href="important.pdf" target="_blank"><span class="chip">📋</span><span class="linkLabel">Importance of Contracting — أهمية التعاقد</span></a>
+      <a class="linkCard" href="company comprise.pdf" target="_blank"><span class="chip">⚖️</span><span class="linkLabel">Company Compare — مقارنة الشركات</span></a>
+      <a class="linkCard" href="labor.pdf" target="_blank"><span class="chip">👷</span><span class="linkLabel">Company Manpower List — كشف العمل والعمال</span></a>
+      <a class="linkCard" href="Maintinance-list.pdf" target="_blank"><span class="chip">🔧</span><span class="linkLabel">Maintenance list — كشف الصيانة</span></a>
+      <a class="linkCard" href="imp.pdf" target="_blank"><span class="chip">🏗️</span><span class="linkLabel">Major Projects — أهم المشاريع</span></a>
+      <a class="linkCard" href="fuji-sub-tech.pdf.pdf" target="_blank"><span class="chip">📐</span><span class="linkLabel">TECHNICAL SUBMITTAL Fuji — سابميتال فوجي</span></a>
+      <a class="linkCard" href="TECHNICAL SUBMITTAL_ Italy.pdf" target="_blank"><span class="chip">📏</span><span class="linkLabel">Italy Submittal — سابميتال إيطالي</span></a>
+      <a class="linkCard" href="ملف الاستدامة المؤسسي.pdf" target="_blank"><span class="chip">🌱</span><span class="linkLabel">Sustainability — الاستدامة</span></a>
+      <a class="linkCard" href="smart home.pdf" target="_blank"><span class="chip">🏠</span><span class="linkLabel">smart home — البيت الذكي</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="contactBand" id="contact">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="kicker" style="justify-content:center;">Contact Links</div>
+      <h2>روابط التواصل</h2>
+      <p>تابعنا وتواصل معنا عبر جميع المنصات الرسمية لمجموعة سمو.</p>
+    </div>
+    <div class="iconGrid reveal">
+      <a class="iconCard" href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank"><span class="chip">💬</span><span class="lbl">WhatsApp</span></a>
+      <a class="iconCard" href="mailto:info@smou.ae" target="_blank"><span class="chip">✉️</span><span class="lbl">Email</span></a>
+      <a class="iconCard" href="https://smoulift.com/" target="_blank"><span class="chip">🌐</span><span class="lbl">Website</span></a>
+      <a class="iconCard" href="https://www.instagram.com/smou.group/" target="_blank"><span class="chip">📸</span><span class="lbl">Instagram</span></a>
+      <a class="iconCard" href="https://www.facebook.com/smoulift/" target="_blank"><span class="chip">📘</span><span class="lbl">Facebook</span></a>
+      <a class="iconCard" href="https://www.tiktok.com/@smou.group" target="_blank"><span class="chip">🎵</span><span class="lbl">TikTok</span></a>
+      <a class="iconCard" href="https://x.com/smou_group" target="_blank"><span class="chip">✖️</span><span class="lbl">X</span></a>
+      <a class="iconCard" href="https://www.linkedin.com/in/smou-group-88a5ba18a/" target="_blank"><span class="chip">💼</span><span class="lbl">LinkedIn</span></a>
+      <a class="iconCard" href="https://www.pinterest.com/SMOUGROUP/" target="_blank"><span class="chip">📌</span><span class="lbl">Pinterest</span></a>
+      <a class="iconCard" href="https://www.youtube.com/@smou-group/featured" target="_blank"><span class="chip">▶️</span><span class="lbl">YouTube</span></a>
+      <a class="iconCard" href="https://accounts.snapchat.com/v2/welcome" target="_blank"><span class="chip">👻</span><span class="lbl">Snapchat</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="locations" style="padding-bottom:100px;">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="kicker" style="justify-content:center;">Locations</div>
+      <h2>مواقع فروع الإمارات</h2>
+      <p>زرنا في أقرب فرع أو احصل على الاتجاهات مباشرة عبر خرائط جوجل.</p>
+    </div>
+    <div class="locGrid reveal">
+      <a class="locCard" href="https://maps.app.goo.gl/8BQZmvxWvN9CycY26" target="_blank">
+        <div class="locPin"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
+        <div class="locOffice">Branch — فرع</div>
+        <div class="locName">Dubai — دبي</div>
+        <span class="locLink">احصل على الاتجاهات <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="locCard" href="https://maps.app.goo.gl/BdN89H2ixf1sw1hz6" target="_blank">
+        <div class="locPin"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
+        <div class="locOffice">Branch — فرع</div>
+        <div class="locName">Abu Dhabi — أبوظبي</div>
+        <span class="locLink">احصل على الاتجاهات <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="locCard" href="https://maps.app.goo.gl/6YnUf5W5Bn8LRvMN7" target="_blank">
+        <div class="locPin"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
+        <div class="locOffice">Branch — فرع</div>
+        <div class="locName">Al Ain — العين</div>
+        <span class="locLink">احصل على الاتجاهات <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="locCard" href="https://maps.app.goo.gl/hS98r6hN2Bytv4Ex9" target="_blank">
+        <div class="locPin"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
+        <div class="locOffice">Branch — فرع</div>
+        <div class="locName">Sharjah — الشارقة</div>
+        <span class="locLink">احصل على الاتجاهات <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footRow">
+      <div class="footBrand">
+        <div class="brandMark" style="width:36px;height:36px;"><svg viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M8 6c0-1.5 1.5-2.5 4-2.5s4 1 4 2.5-1.7 2-4 3-4 1.5-4 3 1.5 2.5 4 2.5 4-1 4-2.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div>
+        <b>SMOU GROUP</b>
+      </div>
+      <div class="footSocial">
+        <a href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5Z"/></svg></a>
+        <a href="https://www.instagram.com/smou.group/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+        <a href="https://www.facebook.com/smoulift/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.5l.5-3H14V9Z"/></svg></a>
+        <a href="https://www.linkedin.com/in/smou-group-88a5ba18a/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4.5c0-1.4 1-2.5 2.5-2.5s2.5 1.1 2.5 2.5V17"/></svg></a>
+      </div>
+    </div>
+    <div class="footBottom">
+      <span>© 2026 SMOU GROUP. جميع الحقوق محفوظة.</span>
+      <span>دبي · الشارقة · رأس الخيمة · أبوظبي · العين</span>
+    </div>
+  </div>
+</footer>
+
+<button class="backTop" id="backTop" aria-label="العودة للأعلى"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
 <script>
-// AI neural-network canvas — drifting nodes connected by light-lines within reach
-(function(){
-  const canvas = document.getElementById('aiCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const hero = canvas.closest('.hero');
-  let nodes = [], w = 0, h = 0, running = true;
-  const isSmall = window.matchMedia('(max-width:760px)').matches;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function resize(){
-    w = canvas.width = hero.offsetWidth;
-    h = canvas.height = hero.offsetHeight;
-    const count = Math.min(60, Math.max(24, Math.floor((w*h)/38000)));
-    nodes = Array.from({length: count}, ()=>({
-      x: Math.random()*w, y: Math.random()*h,
-      vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25,
-      r: Math.random()*1.6+0.6
-    }));
-  }
-
-  function step(){
-    if(!running) return;
-    ctx.clearRect(0,0,w,h);
-    for(const n of nodes){
-      n.x += n.vx; n.y += n.vy;
-      if(n.x < 0 || n.x > w) n.vx *= -1;
-      if(n.y < 0 || n.y > h) n.vy *= -1;
-    }
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x-b.x, dy = a.y-b.y;
-        const dist = Math.sqrt(dx*dx+dy*dy);
-        if(dist < 130){
-          ctx.strokeStyle = `rgba(143,214,255,${(1-dist/130)*0.22})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-        }
-      }
-    }
-    for(const n of nodes){
-      ctx.beginPath();
-      ctx.fillStyle = 'rgba(215,241,255,0.75)';
-      ctx.shadowColor = 'rgba(143,214,255,0.65)';
-      ctx.shadowBlur = 6;
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-      ctx.fill();
-    }
-    requestAnimationFrame(step);
-  }
-
-  if(!isSmall && !reduceMotion){
-    resize();
-    requestAnimationFrame(step);
-    window.addEventListener('resize', ()=>{ resize(); });
-  } else {
-    canvas.style.display = 'none';
-  }
-})();
-
-// Elevator door intro — plays once, then unmounts
-window.addEventListener('load', ()=>{
-  const doorIntro = document.getElementById('doorIntro');
-  setTimeout(()=>{
-    doorIntro.classList.add('open');
-    setTimeout(()=>{
-      doorIntro.classList.add('hide');
-    }, 1300);
-  }, 380);
+document.getElementById('menuToggle').addEventListener('click', function(){
+  const panel = document.getElementById('mobilePanel');
+  const open = panel.classList.toggle('open');
+  this.setAttribute('aria-expanded', open);
+});
+document.querySelectorAll('.mobilePanel a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    document.getElementById('mobilePanel').classList.remove('open');
+    document.getElementById('menuToggle').setAttribute('aria-expanded', false);
+  });
 });
 
-// Reveal on scroll
 const revealObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){ entry.target.classList.add('show'); }
-  });
-},{threshold:0.12});
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
 
-// Ripple / press feedback
-document.querySelectorAll('.fancyBtn').forEach(btn=>{
-  btn.addEventListener('click', function(e){
-    const rect = this.getBoundingClientRect();
-    const ripple = document.createElement('span');
-    const size = Math.max(rect.width, rect.height);
-    ripple.className = 'ripple';
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-    ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
-    this.appendChild(ripple);
-    this.classList.remove('pressed');
-    void this.offsetWidth;
-    this.classList.add('pressed');
-    setTimeout(()=>ripple.remove(),700);
-    setTimeout(()=>this.classList.remove('pressed'),450);
-  });
-});
-
-// Shared smooth-scroll for both the pill nav and the floor rail
-function smoothScrollTo(targetSelector){
-  const target = document.querySelector(targetSelector);
-  if(!target) return;
-  const navH = document.getElementById('quickNav').offsetHeight;
-  const isBottomBar = getComputedStyle(document.getElementById('quickNav')).top === 'auto' || window.innerWidth <= 760;
-  const offset = isBottomBar ? 0 : navH + 26;
-  const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-  window.scrollTo({top, behavior:'smooth'});
-}
-
-// Quick nav: smooth scroll + active section highlighting
-const navItems = Array.from(document.querySelectorAll('.navItem'));
-const floorStops = Array.from(document.querySelectorAll('.floorStop'));
-const floorCar = document.getElementById('floorCar');
-const navSections = ['#hero','#decoration','#documents','#contact','#locations']
-  .map(id => document.querySelector(id))
-  .filter(Boolean);
-
-navItems.forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    e.preventDefault();
-    smoothScrollTo(a.dataset.target);
-  });
-});
-floorStops.forEach(btn=>{
-  btn.addEventListener('click', ()=> smoothScrollTo(btn.dataset.target));
-});
-
-function setActiveFloor(id){
-  floorStops.forEach((btn,i)=>{
-    const isActive = btn.dataset.target === id;
-    btn.classList.toggle('active', isActive);
-    if(isActive){
-      const rowHeight = btn.offsetTop - (floorStops[0] ? floorStops[0].offsetTop : 0);
-      floorCar.style.top = btn.offsetTop + (btn.offsetHeight/2 - 3) + 'px';
-    }
-  });
-}
-
-const sectionObserver = new IntersectionObserver((entries)=>{
+const navLinks = Array.from(document.querySelectorAll('nav.mainNav a'));
+const navSections = ['#hero','#decoration','#documents','#contact','#locations'].map(id=>document.querySelector(id)).filter(Boolean);
+const navObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       const id = '#' + entry.target.id;
-      navItems.forEach(a=>a.classList.toggle('active', a.dataset.target === id));
-      setActiveFloor(id);
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === id));
     }
   });
-},{threshold:0.35, rootMargin:'-15% 0px -55% 0px'});
-navSections.forEach(s=>sectionObserver.observe(s));
+},{threshold:.3, rootMargin:'-20% 0px -60% 0px'});
+navSections.forEach(s=>navObserver.observe(s));
 
-// initialize floor car position after layout settles
-window.addEventListener('load', ()=> setActiveFloor('#hero'));
-
-// Back-to-top button (throttled via rAF)
-const toTopBtn = document.getElementById('toTop');
+const backTop = document.getElementById('backTop');
 let ticking = false;
 window.addEventListener('scroll', ()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
-      toTopBtn.classList.toggle('show', window.scrollY > window.innerHeight * 0.6);
+      backTop.classList.toggle('show', window.scrollY > window.innerHeight*0.6);
       ticking = false;
     });
     ticking = true;
   }
 }, {passive:true});
-toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-
-// Performance: pause the background videos on small / low-power screens
-const mobileQuery = window.matchMedia('(max-width: 760px)');
-function handleVideoPerf(mq){
-  document.querySelectorAll('.bgVideo, .bgVideoFrame video').forEach(v=>{
-    if(mq.matches){ v.pause(); } else { v.play().catch(()=>{}); }
-  });
-}
-handleVideoPerf(mobileQuery);
-mobileQuery.addEventListener('change', handleVideoPerf);
+backTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 </script>
 </body>
 </html>
