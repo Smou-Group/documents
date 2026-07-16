@@ -6,7 +6,7 @@
 <title>SMOU GROUP — مجموعة سمو</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -20,6 +20,8 @@
   --text:#eef6ff;
   --muted:rgba(238,246,255,.72);
   --border:rgba(143,214,255,.22);
+  --metal-1:rgba(255,255,255,.16);
+  --metal-2:rgba(143,214,255,.06);
   --shadow:0 18px 45px rgba(0,0,10,.40);
   --shadowStrong:0 30px 80px rgba(0,0,10,.55);
   --nav-h:64px;
@@ -41,6 +43,54 @@ body{min-height:100vh; position:relative;}
   html{scroll-behavior:auto}
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
 }
+
+/* fine brushed-metal grain, very subtle, gives the glass a machined feel */
+.grain{
+  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* AI neural-network canvas — drifting nodes + connecting light-lines behind the hero */
+.aiCanvas{
+  position:absolute; inset:0; z-index:-3; opacity:.55; pointer-events:none;
+}
+
+/* AI scan beam — a light sweep that reads as a system actively "thinking" */
+.scanBeam{
+  position:absolute; left:0; right:0; height:140px; z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, transparent, rgba(143,214,255,.10) 45%, rgba(215,241,255,.16) 50%, rgba(143,214,255,.10) 55%, transparent);
+  mix-blend-mode:screen;
+  animation:scanSweep 9s ease-in-out infinite;
+}
+@keyframes scanSweep{
+  0%{top:-140px}
+  50%{top:100%}
+  50.01%{top:-140px}
+  100%{top:-140px}
+}
+@media (max-width:760px){ .scanBeam{display:none} }
+
+/* HUD corner brackets — reads as an AI system panel, applied to portalCard */
+.hud{position:relative;}
+.hud::before{
+  content:""; position:absolute; width:22px; height:22px; z-index:3; pointer-events:none;
+  border-color:rgba(143,214,255,.55); border-style:solid; border-width:0;
+  filter:drop-shadow(0 0 6px rgba(143,214,255,.35));
+  top:14px; inset-inline-start:14px; border-top-width:2px; border-inline-start-width:2px; border-top-left-radius:8px;
+}
+.hud::after{
+  content:""; position:absolute; width:22px; height:22px; z-index:3; pointer-events:none;
+  border-color:rgba(143,214,255,.55); border-style:solid; border-width:0;
+  filter:drop-shadow(0 0 6px rgba(143,214,255,.35));
+  bottom:14px; inset-inline-end:14px; border-bottom-width:2px; border-inline-end-width:2px; border-bottom-right-radius:8px;
+}
+.hudTR,.hudBL{
+  position:absolute; width:22px; height:22px; z-index:3; pointer-events:none;
+  border-color:rgba(143,214,255,.55); border-style:solid; border-width:0;
+  filter:drop-shadow(0 0 6px rgba(143,214,255,.35));
+}
+.hudTR{top:14px; inset-inline-end:14px; border-top-width:2px; border-inline-end-width:2px; border-top-right-radius:8px;}
+.hudBL{bottom:14px; inset-inline-start:14px; border-bottom-width:2px; border-inline-start-width:2px; border-bottom-left-radius:8px;}
 
 body::before,
 body::after{
@@ -69,6 +119,93 @@ body::after{
   0%,100%{transform:translateY(0) scale(1)}
   50%{transform:translateY(-16px) scale(1.06)}
 }
+
+/* ============ ELEVATOR DOOR INTRO — signature load moment ============ */
+.doorIntro{
+  position:fixed; inset:0; z-index:300; display:flex;
+  pointer-events:none;
+}
+.doorPanel{
+  position:relative; width:50%; height:100%;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.03), transparent 40%),
+    repeating-linear-gradient(180deg, rgba(255,255,255,.05) 0px, rgba(255,255,255,.05) 1px, transparent 1px, transparent 5px),
+    linear-gradient(160deg, #0d1e33, #061020 55%, #030710);
+  transition:transform 1.15s cubic-bezier(.65,0,.2,1);
+  box-shadow:inset 0 0 80px rgba(0,0,10,.6);
+}
+.doorPanel::after{
+  content:""; position:absolute; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg, transparent, rgba(143,214,255,.7), transparent);
+  box-shadow:0 0 18px rgba(143,214,255,.6);
+}
+.doorLeft{transform:translateX(0)}
+.doorLeft::after{right:0}
+.doorRight{transform:translateX(0)}
+.doorRight::after{left:0}
+.doorMark{
+  position:absolute; top:50%; transform:translateY(-50%);
+  font-family:"Cairo",sans-serif; font-weight:800; font-size:15px; letter-spacing:6px;
+  color:rgba(143,214,255,.55);
+}
+.doorLeft .doorMark{right:36px}
+.doorRight .doorMark{left:36px}
+.doorChime{
+  position:absolute; top:50%; left:50%; width:10px; height:10px; border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:radial-gradient(circle, #fff, var(--sky) 45%, transparent 72%);
+  box-shadow:0 0 0 0 rgba(143,214,255,.6);
+  z-index:301;
+}
+.doorIntro.open .doorLeft{transform:translateX(-101%)}
+.doorIntro.open .doorRight{transform:translateX(101%)}
+.doorIntro.open .doorChime{animation:chimePulse .9s ease-out forwards;}
+.doorIntro.hide{display:none;}
+@keyframes chimePulse{
+  0%{transform:translate(-50%,-50%) scale(.2); opacity:1; box-shadow:0 0 0 0 rgba(143,214,255,.55)}
+  60%{opacity:1}
+  100%{transform:translate(-50%,-50%) scale(9); opacity:0; box-shadow:0 0 0 40px rgba(143,214,255,0)}
+}
+
+/* ============ FLOOR RAIL — elevator-position indicator, doubles as nav ============ */
+.floorRail{
+  position:fixed; top:50%; left:20px; transform:translateY(-50%);
+  z-index:58; display:flex; flex-direction:column; align-items:center;
+  padding:14px 8px; border-radius:20px;
+  background:rgba(8,15,27,.5);
+  border:1px solid var(--border);
+  backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 16px 40px rgba(0,0,10,.4);
+}
+.floorRail-track{
+  position:relative; display:flex; flex-direction:column; align-items:center; gap:26px;
+  padding:4px 0;
+}
+.floorRail-track::before{
+  content:""; position:absolute; top:6px; bottom:6px; left:50%; width:2px; transform:translateX(-50%);
+  background:linear-gradient(180deg, rgba(143,214,255,.08), rgba(143,214,255,.35), rgba(143,214,255,.08));
+}
+.floorRail-car{
+  position:absolute; right:-15px; width:6px; height:6px; border-radius:50%;
+  background:radial-gradient(circle, #fff, var(--sky-light) 45%, var(--sky-deep) 80%);
+  box-shadow:0 0 10px 2px rgba(143,214,255,.75);
+  transition:top .5s cubic-bezier(.4,0,.2,1);
+  top:0;
+}
+.floorStop{
+  position:relative; z-index:2; width:30px; height:30px; border-radius:50%;
+  border:1px solid rgba(143,214,255,.25); background:rgba(6,12,22,.85);
+  color:var(--muted); font-family:"Cairo",sans-serif; font-weight:700; font-size:11px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  transition:all .3s ease;
+}
+.floorStop:hover{border-color:rgba(143,214,255,.7); color:var(--sky-light);}
+.floorStop.active{
+  color:var(--bg1); background:linear-gradient(160deg, var(--sky-light), var(--sky-deep));
+  box-shadow:0 0 16px rgba(143,214,255,.65);
+  border-color:transparent;
+}
+@media (max-width:1180px){ .floorRail{display:none} }
 
 /* ============ STICKY QUICK NAV (desktop pill / mobile bottom bar) ============ */
 .quickNav{
@@ -167,6 +304,7 @@ body::after{
 .toTop svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
 @media (max-width:760px){ .toTop{bottom:78px; left:14px; width:40px; height:40px;} }
 @media (min-width:761px){ .toTop{bottom:24px;} }
+@media (max-width:1180px) and (min-width:761px){ .toTop{left:18px;} }
 
 .hero{
   min-height:100vh;
@@ -319,11 +457,18 @@ body::after{
   border:1px solid var(--border);
   backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
   box-shadow:var(--shadowStrong);
+  animation:logoBreathe 5s ease-in-out infinite;
 }
 .logo::before{
   content:""; position:absolute; inset:-1px; border-radius:inherit;
   background:conic-gradient(from 160deg, rgba(143,214,255,.75), rgba(215,241,255,.4), rgba(61,143,208,.55), rgba(143,214,255,.75));
   z-index:-1; filter:blur(9px); opacity:.55;
+  animation:logoRing 8s linear infinite;
+}
+@keyframes logoRing{from{filter:blur(9px) hue-rotate(0deg)} to{filter:blur(9px) hue-rotate(360deg)}}
+@keyframes logoBreathe{
+  0%,100%{box-shadow:var(--shadowStrong)}
+  50%{box-shadow:var(--shadowStrong), 0 0 34px rgba(143,214,255,.25)}
 }
 .logo img{width:82%; height:82%; object-fit:contain; filter:drop-shadow(0 2px 10px rgba(0,0,10,.5));}
 
@@ -338,12 +483,20 @@ body::after{
   width:9px; height:9px; border-radius:50%;
   background:radial-gradient(circle at 30% 30%, var(--sky-light), var(--sky-deep));
   box-shadow:0 0 12px rgba(143,214,255,.75); display:block;
+  animation:ledBlink 2.4s ease-in-out infinite;
 }
+@keyframes ledBlink{0%,100%{opacity:1} 50%{opacity:.45}}
 
 h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; text-shadow:0 10px 35px rgba(0,0,10,.5);}
 .gradientTitle{
   background:linear-gradient(90deg,#ffffff 0%,#d7f1ff 35%,#8fd6ff 65%,#ffffff 100%);
+  background-size:220% auto;
   -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:titleSheen 7s linear infinite;
+}
+@keyframes titleSheen{
+  0%{background-position:0% 50%}
+  100%{background-position:220% 50%}
 }
 .subtitle{margin:14px 0 0; font-size:clamp(15px,2vw,20px); color:var(--muted); font-weight:500;}
 
@@ -364,16 +517,31 @@ h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; t
   content:""; position:absolute; top:0; left:0; right:0; height:1px;
   background:linear-gradient(90deg, transparent, rgba(143,214,255,.65), transparent);
 }
+/* slow rotating light tracing the card edge — reads as an active AI system, not decoration for its own sake */
+.edgeGlow{
+  position:absolute; inset:-1px; border-radius:inherit; z-index:0; pointer-events:none;
+  padding:1px; -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  background:conic-gradient(from 0deg, transparent 0%, rgba(143,214,255,.9) 8%, transparent 20%, transparent 80%, rgba(215,241,255,.55) 92%, transparent 100%);
+  opacity:.6;
+  animation:edgeSpin 6s linear infinite;
+}
+@keyframes edgeSpin{to{transform:rotate(360deg)}}
 
 .section{scroll-margin-top:calc(var(--nav-h) + 14px);}
 .section + .section{margin-top:32px}
 .sectionHeader{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:18px;}
-.sectionTitle{position:relative; font-size:19px; font-weight:800; padding-inline-start:16px; color:var(--ivory);}
+.sectionTitle{position:relative; display:flex; align-items:center; gap:12px; font-size:19px; font-weight:800; padding-inline-start:16px; color:var(--ivory);}
 .sectionTitle::before{
   content:""; position:absolute; inset-inline-start:0; top:50%; transform:translateY(-50%);
   width:5px; height:22px; border-radius:999px;
   background:linear-gradient(180deg,var(--sky-light),var(--sky-deep));
   box-shadow:0 0 14px rgba(143,214,255,.55);
+}
+.floorTag{
+  font-family:"Cairo",sans-serif; font-size:11px; font-weight:800; letter-spacing:1.5px;
+  color:var(--bg1); background:linear-gradient(160deg,var(--sky-light),var(--sky-deep));
+  padding:3px 9px; border-radius:7px; box-shadow:0 4px 12px rgba(143,214,255,.25);
 }
 .divider{flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(143,214,255,.34), transparent);}
 
@@ -397,6 +565,15 @@ h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; t
   content:""; position:absolute; inset:0; border-radius:inherit;
   background:linear-gradient(180deg, rgba(255,255,255,.18), transparent 34%);
   pointer-events:none;
+}
+/* elevator cabin LED — glows on hover, tiny signal light in the corner */
+.btn .ledDot, .iconBtn .ledDot, .locationBtn .ledDot{
+  position:absolute; top:12px; inset-inline-end:12px; width:6px; height:6px; border-radius:50%;
+  background:rgba(143,214,255,.35); box-shadow:0 0 0 rgba(143,214,255,0);
+  transition:all .3s ease; z-index:2;
+}
+.btn:hover .ledDot, .iconBtn:hover .ledDot, .locationBtn:hover .ledDot{
+  background:var(--sky-light); box-shadow:0 0 10px 2px rgba(143,214,255,.8);
 }
 .btn:hover, .iconBtn:hover, .locationBtn:hover{
   transform:translateY(-6px);
@@ -443,7 +620,9 @@ h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; t
   background:linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
   border:1px solid rgba(143,214,255,.3);
   box-shadow:0 12px 26px rgba(0,0,10,.3), 0 0 16px rgba(143,214,255,.14) inset;
+  transition:box-shadow .3s ease;
 }
+.locationBtn:hover .pinIcon{box-shadow:0 12px 26px rgba(0,0,10,.3), 0 0 20px rgba(143,214,255,.4) inset, 0 0 22px rgba(143,214,255,.35);}
 .pinIcon svg{width:24px; height:24px; fill:var(--sky-light); filter:drop-shadow(0 0 6px rgba(143,214,255,.4));}
 .locationOffice{font-size:12.5px; color:var(--muted); font-weight:500; letter-spacing:.4px}
 .locationName{font-size:16.5px; font-weight:800; color:var(--ivory)}
@@ -487,6 +666,27 @@ h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; t
 </head>
 <body>
 
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Elevator door intro: opens once on load, then hides itself -->
+<div class="doorIntro" id="doorIntro" aria-hidden="true">
+  <div class="doorPanel doorLeft"><span class="doorMark">S</span></div>
+  <div class="doorPanel doorRight"><span class="doorMark">M</span></div>
+  <div class="doorChime" id="doorChime"></div>
+</div>
+
+<!-- Floor-position rail: decorative elevator indicator that also navigates -->
+<nav class="floorRail" id="floorRail" aria-label="مؤشر الطابق">
+  <div class="floorRail-track">
+    <div class="floorRail-car" id="floorCar"></div>
+    <button class="floorStop" data-target="#hero" title="الرئيسية">G</button>
+    <button class="floorStop" data-target="#decoration" title="الديكورات">1</button>
+    <button class="floorStop" data-target="#documents" title="المستندات">2</button>
+    <button class="floorStop" data-target="#contact" title="التواصل">3</button>
+    <button class="floorStop" data-target="#locations" title="الفروع">PH</button>
+  </div>
+</nav>
+
 <!-- Quick navigation: sticky pill (desktop) / bottom tab bar (mobile) -->
 <nav class="quickNav" id="quickNav">
   <a class="navItem" data-target="#hero" href="#hero">
@@ -521,6 +721,8 @@ h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; t
   <source src="vedio.mp4" type="video/mp4">
 </video>
 
+<canvas class="aiCanvas" id="aiCanvas" aria-hidden="true"></canvas>
+<div class="scanBeam" aria-hidden="true"></div>
 <div class="flares" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 <div class="rings" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="particles" aria-hidden="true">
@@ -554,94 +756,101 @@ h1{margin:0; font-size:clamp(30px,4vw,58px); line-height:1.2; font-weight:800; t
     <p class="subtitle">اختر القسم المطلوب للدخول مباشرة</p>
   </div>
 
-  <div class="portalCard">
+  <div class="portalCard hud">
+    <span class="edgeGlow"></span>
+    <span class="hudTR"></span>
+    <span class="hudBL"></span>
 
     <div class="section reveal" id="decoration">
       <div class="sectionHeader">
-        <div class="sectionTitle">Decoration — الديكورات</div>
+        <div class="sectionTitle"><span class="floorTag">1</span>Decoration — الديكورات</div>
         <div class="divider"></div>
       </div>
       <div class="buttons">
-        <a class="btn fancyBtn" href="https://fuji.smougroup.com/" target="_blank">Fuji Decoration — ديكورات الفوجي</a>
-        <a class="btn fancyBtn" href="https://italy.smougroup.com/" target="_blank">Italian Decoration — ديكورات الإيطالي</a>
-        <a class="btn fancyBtn" href="Cabin Catalouge Fuji.pdf" target="_blank">Fuji Catalogue — كاتلوج الفوجي</a>
-        <a class="btn fancyBtn" href="cataluge- Italy.pdf" target="_blank">Italian Catalogue — كاتلوج الإيطالي</a>
-        <a class="btn fancyBtn" href="./Light.pdf" target="_blank">
+        <a class="btn fancyBtn" href="https://fuji.smougroup.com/" target="_blank"><span class="ledDot"></span>Fuji Decoration — ديكورات الفوجي</a>
+        <a class="btn fancyBtn" href="https://italy.smougroup.com/" target="_blank"><span class="ledDot"></span>Italian Decoration — ديكورات الإيطالي</a>
+        <a class="btn fancyBtn" href="Cabin Catalouge Fuji.pdf" target="_blank"><span class="ledDot"></span>Fuji Catalogue — كاتلوج الفوجي</a>
+        <a class="btn fancyBtn" href="cataluge- Italy.pdf" target="_blank"><span class="ledDot"></span>Italian Catalogue — كاتلوج الإيطالي</a>
+        <a class="btn fancyBtn" href="./Light.pdf" target="_blank"><span class="ledDot"></span>
 Lighting Guide — دليل الإضاءة
 </a>
-        <a class="btn fancyBtn" href="Marble- collection.pdf" target="_blank">Marble collection —  مجموعة رخام</a>
-<a class="btn fancyBtn" href="https://vedios.smougroup.com/" target="_blank">Project Handover — تسليم المشاريع</a>
-        <a class="btn fancyBtn" href="https://review.smougroup.com/" target="_blank">Client Reviews — آراء العملاء</a>
+        <a class="btn fancyBtn" href="Marble- collection.pdf" target="_blank"><span class="ledDot"></span>Marble collection —  مجموعة رخام</a>
+<a class="btn fancyBtn" href="https://vedios.smougroup.com/" target="_blank"><span class="ledDot"></span>Project Handover — تسليم المشاريع</a>
+        <a class="btn fancyBtn" href="https://review.smougroup.com/" target="_blank"><span class="ledDot"></span>Client Reviews — آراء العملاء</a>
 
       </div>
     </div>
 
     <div class="section reveal" id="documents">
       <div class="sectionHeader">
-        <div class="sectionTitle">Documents — المستندات</div>
+        <div class="sectionTitle"><span class="floorTag">2</span>Documents — المستندات</div>
         <div class="divider"></div>
       </div>
       <div class="buttons">
-        <a class="btn fancyBtn" href="https://online.pubhtml5.com/gruby/ofcy/" target="_blank">Profile — البروفايل</a>
-        <a class="btn fancyBtn" href="التراخيص والاعتمادات 2026.pdf" target="_blank">Licenses and Approvals — التراخيص والاعتمادات</a>
-        <a class="btn fancyBtn" href="https://family.smougroup.com/" target="_blank">Family list — كشف العائلات</a>
-        <a class="btn fancyBtn" href="https://area.smougroup.com/" target="_blank">Area list — كشف المناطق</a>
-        <a class="btn fancyBtn" href="https://office.smougroup.com/" target="_blank">Companies list — كشف الشركات</a>
-        <a class="btn fancyBtn" href="important.pdf" target="_blank">Importance of Contracting — أهمية التعاقد</a>
-        <a class="btn fancyBtn" href="company comprise.pdf" target="_blank">Company Compare — مقارنة الشركات</a>
-        <a class="btn fancyBtn" href="labor.pdf" target="_blank">Company Manpower List — كشف العمل والعمال</a>
-        <a class="btn fancyBtn" href="Maintinance-list.pdf" target="_blank">Maintenance list — كشف الصيانة</a>
-         <a class="btn fancyBtn" href="imp.pdf" target="_blank">Major Projects — أهم المشاريع</a>
-        <a class="btn fancyBtn" href="fuji-sub-tech.pdf.pdf" target="_blank">TECHNICAL SUBMITTAL Fuji — سابميتال فوجي</a>
-        <a class="btn fancyBtn" href="TECHNICAL SUBMITTAL_ Italy.pdf" target="_blank">Italy Submittal — سابميتال إيطالي</a>
-        <a class="btn fancyBtn" href="ملف الاستدامة المؤسسي.pdf" target="_blank">Sustainability- الاستدامة</a>
-        <a class="btn fancyBtn" href="smart home.pdf" target="_blank">smart home- البيت الذكي</a>
+        <a class="btn fancyBtn" href="https://online.pubhtml5.com/gruby/ofcy/" target="_blank"><span class="ledDot"></span>Profile — البروفايل</a>
+        <a class="btn fancyBtn" href="التراخيص والاعتمادات 2026.pdf" target="_blank"><span class="ledDot"></span>Licenses and Approvals — التراخيص والاعتمادات</a>
+        <a class="btn fancyBtn" href="https://family.smougroup.com/" target="_blank"><span class="ledDot"></span>Family list — كشف العائلات</a>
+        <a class="btn fancyBtn" href="https://area.smougroup.com/" target="_blank"><span class="ledDot"></span>Area list — كشف المناطق</a>
+        <a class="btn fancyBtn" href="https://office.smougroup.com/" target="_blank"><span class="ledDot"></span>Companies list — كشف الشركات</a>
+        <a class="btn fancyBtn" href="important.pdf" target="_blank"><span class="ledDot"></span>Importance of Contracting — أهمية التعاقد</a>
+        <a class="btn fancyBtn" href="company comprise.pdf" target="_blank"><span class="ledDot"></span>Company Compare — مقارنة الشركات</a>
+        <a class="btn fancyBtn" href="labor.pdf" target="_blank"><span class="ledDot"></span>Company Manpower List — كشف العمل والعمال</a>
+        <a class="btn fancyBtn" href="Maintinance-list.pdf" target="_blank"><span class="ledDot"></span>Maintenance list — كشف الصيانة</a>
+         <a class="btn fancyBtn" href="imp.pdf" target="_blank"><span class="ledDot"></span>Major Projects — أهم المشاريع</a>
+        <a class="btn fancyBtn" href="fuji-sub-tech.pdf.pdf" target="_blank"><span class="ledDot"></span>TECHNICAL SUBMITTAL Fuji — سابميتال فوجي</a>
+        <a class="btn fancyBtn" href="TECHNICAL SUBMITTAL_ Italy.pdf" target="_blank"><span class="ledDot"></span>Italy Submittal — سابميتال إيطالي</a>
+        <a class="btn fancyBtn" href="ملف الاستدامة المؤسسي.pdf" target="_blank"><span class="ledDot"></span>Sustainability- الاستدامة</a>
+        <a class="btn fancyBtn" href="smart home.pdf" target="_blank"><span class="ledDot"></span>smart home- البيت الذكي</a>
 
       </div>
     </div>
 
     <div class="section reveal" id="contact">
       <div class="sectionHeader">
-        <div class="sectionTitle">Contact Links — روابط التواصل</div>
+        <div class="sectionTitle"><span class="floorTag">3</span>Contact Links — روابط التواصل</div>
         <div class="divider"></div>
       </div>
       <div class="iconGrid">
-        <a class="iconBtn fancyBtn" href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank">WhatsApp</a>
-        <a class="iconBtn fancyBtn" href="mailto:info@smou.ae" target="_blank">Email</a>
-        <a class="iconBtn fancyBtn" href="https://smoulift.com/" target="_blank">Website</a>
-        <a class="iconBtn fancyBtn" href="https://www.instagram.com/smou.group/" target="_blank">Instagram</a>
-        <a class="iconBtn fancyBtn" href="https://www.facebook.com/smoulift/" target="_blank">Facebook</a>
-        <a class="iconBtn fancyBtn" href="https://www.tiktok.com/@smou.group" target="_blank">TikTok</a>
-        <a class="iconBtn fancyBtn" href="https://x.com/smou_group" target="_blank">X</a>
-        <a class="iconBtn fancyBtn" href="https://www.linkedin.com/in/smou-group-88a5ba18a/" target="_blank">LinkedIn</a>
-        <a class="iconBtn fancyBtn" href="https://www.pinterest.com/SMOUGROUP/" target="_blank">Pinterest</a>
-        <a class="iconBtn fancyBtn" href="https://www.youtube.com/@smou-group/featured" target="_blank">YouTube</a>
-        <a class="iconBtn fancyBtn" href="https://accounts.snapchat.com/v2/welcome" target="_blank">Snapchat</a>
+        <a class="iconBtn fancyBtn" href="https://api.whatsapp.com/send/?phone=971501035499" target="_blank"><span class="ledDot"></span>WhatsApp</a>
+        <a class="iconBtn fancyBtn" href="mailto:info@smou.ae" target="_blank"><span class="ledDot"></span>Email</a>
+        <a class="iconBtn fancyBtn" href="https://smoulift.com/" target="_blank"><span class="ledDot"></span>Website</a>
+        <a class="iconBtn fancyBtn" href="https://www.instagram.com/smou.group/" target="_blank"><span class="ledDot"></span>Instagram</a>
+        <a class="iconBtn fancyBtn" href="https://www.facebook.com/smoulift/" target="_blank"><span class="ledDot"></span>Facebook</a>
+        <a class="iconBtn fancyBtn" href="https://www.tiktok.com/@smou.group" target="_blank"><span class="ledDot"></span>TikTok</a>
+        <a class="iconBtn fancyBtn" href="https://x.com/smou_group" target="_blank"><span class="ledDot"></span>X</a>
+        <a class="iconBtn fancyBtn" href="https://www.linkedin.com/in/smou-group-88a5ba18a/" target="_blank"><span class="ledDot"></span>LinkedIn</a>
+        <a class="iconBtn fancyBtn" href="https://www.pinterest.com/SMOUGROUP/" target="_blank"><span class="ledDot"></span>Pinterest</a>
+        <a class="iconBtn fancyBtn" href="https://www.youtube.com/@smou-group/featured" target="_blank"><span class="ledDot"></span>YouTube</a>
+        <a class="iconBtn fancyBtn" href="https://accounts.snapchat.com/v2/welcome" target="_blank"><span class="ledDot"></span>Snapchat</a>
       </div>
     </div>
 
     <div class="section reveal" id="locations">
       <div class="sectionHeader">
-        <div class="sectionTitle">Locations — مواقع فروع الإمارات</div>
+        <div class="sectionTitle"><span class="floorTag">PH</span>Locations — مواقع فروع الإمارات</div>
         <div class="divider"></div>
       </div>
       <div class="locationGrid">
         <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/8BQZmvxWvN9CycY26" target="_blank">
+          <span class="ledDot"></span>
           <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
           <div class="locationOffice">Branch — فرع</div>
           <div class="locationName">Dubai — دبي</div>
         </a>
         <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/BdN89H2ixf1sw1hz6" target="_blank">
+          <span class="ledDot"></span>
           <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
           <div class="locationOffice">Branch — فرع</div>
           <div class="locationName">Abu Dhabi — أبوظبي</div>
         </a>
         <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/6YnUf5W5Bn8LRvMN7" target="_blank">
+          <span class="ledDot"></span>
           <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
           <div class="locationOffice">Branch — فرع</div>
           <div class="locationName">Al Ain — العين</div>
         </a>
         <a class="locationBtn fancyBtn" href="https://maps.app.goo.gl/hS98r6hN2Bytv4Ex9" target="_blank">
+          <span class="ledDot"></span>
           <div class="pinIcon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></div>
           <div class="locationOffice">Branch — فرع</div>
           <div class="locationName">Sharjah — الشارقة</div>
@@ -655,6 +864,78 @@ Lighting Guide — دليل الإضاءة
 </section>
 
 <script>
+// AI neural-network canvas — drifting nodes connected by light-lines within reach
+(function(){
+  const canvas = document.getElementById('aiCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const hero = canvas.closest('.hero');
+  let nodes = [], w = 0, h = 0, running = true;
+  const isSmall = window.matchMedia('(max-width:760px)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize(){
+    w = canvas.width = hero.offsetWidth;
+    h = canvas.height = hero.offsetHeight;
+    const count = Math.min(60, Math.max(24, Math.floor((w*h)/38000)));
+    nodes = Array.from({length: count}, ()=>({
+      x: Math.random()*w, y: Math.random()*h,
+      vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25,
+      r: Math.random()*1.6+0.6
+    }));
+  }
+
+  function step(){
+    if(!running) return;
+    ctx.clearRect(0,0,w,h);
+    for(const n of nodes){
+      n.x += n.vx; n.y += n.vy;
+      if(n.x < 0 || n.x > w) n.vx *= -1;
+      if(n.y < 0 || n.y > h) n.vy *= -1;
+    }
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x-b.x, dy = a.y-b.y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist < 130){
+          ctx.strokeStyle = `rgba(143,214,255,${(1-dist/130)*0.22})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for(const n of nodes){
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(215,241,255,0.75)';
+      ctx.shadowColor = 'rgba(143,214,255,0.65)';
+      ctx.shadowBlur = 6;
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(step);
+  }
+
+  if(!isSmall && !reduceMotion){
+    resize();
+    requestAnimationFrame(step);
+    window.addEventListener('resize', ()=>{ resize(); });
+  } else {
+    canvas.style.display = 'none';
+  }
+})();
+
+// Elevator door intro — plays once, then unmounts
+window.addEventListener('load', ()=>{
+  const doorIntro = document.getElementById('doorIntro');
+  setTimeout(()=>{
+    doorIntro.classList.add('open');
+    setTimeout(()=>{
+      doorIntro.classList.add('hide');
+    }, 1300);
+  }, 380);
+});
+
 // Reveal on scroll
 const revealObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
@@ -682,9 +963,21 @@ document.querySelectorAll('.fancyBtn').forEach(btn=>{
   });
 });
 
+// Shared smooth-scroll for both the pill nav and the floor rail
+function smoothScrollTo(targetSelector){
+  const target = document.querySelector(targetSelector);
+  if(!target) return;
+  const navH = document.getElementById('quickNav').offsetHeight;
+  const isBottomBar = getComputedStyle(document.getElementById('quickNav')).top === 'auto' || window.innerWidth <= 760;
+  const offset = isBottomBar ? 0 : navH + 26;
+  const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top, behavior:'smooth'});
+}
+
 // Quick nav: smooth scroll + active section highlighting
 const navItems = Array.from(document.querySelectorAll('.navItem'));
-const navMap = new Map(navItems.map(a => [a.dataset.target, a]));
+const floorStops = Array.from(document.querySelectorAll('.floorStop'));
+const floorCar = document.getElementById('floorCar');
 const navSections = ['#hero','#decoration','#documents','#contact','#locations']
   .map(id => document.querySelector(id))
   .filter(Boolean);
@@ -692,26 +985,37 @@ const navSections = ['#hero','#decoration','#documents','#contact','#locations']
 navItems.forEach(a=>{
   a.addEventListener('click', (e)=>{
     e.preventDefault();
-    const target = document.querySelector(a.dataset.target);
-    if(target){
-      const navH = document.getElementById('quickNav').offsetHeight;
-      const isBottomBar = getComputedStyle(document.getElementById('quickNav')).top === 'auto' || window.innerWidth <= 760;
-      const offset = isBottomBar ? 0 : navH + 26;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({top, behavior:'smooth'});
-    }
+    smoothScrollTo(a.dataset.target);
   });
 });
+floorStops.forEach(btn=>{
+  btn.addEventListener('click', ()=> smoothScrollTo(btn.dataset.target));
+});
+
+function setActiveFloor(id){
+  floorStops.forEach((btn,i)=>{
+    const isActive = btn.dataset.target === id;
+    btn.classList.toggle('active', isActive);
+    if(isActive){
+      const rowHeight = btn.offsetTop - (floorStops[0] ? floorStops[0].offsetTop : 0);
+      floorCar.style.top = btn.offsetTop + (btn.offsetHeight/2 - 3) + 'px';
+    }
+  });
+}
 
 const sectionObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       const id = '#' + entry.target.id;
       navItems.forEach(a=>a.classList.toggle('active', a.dataset.target === id));
+      setActiveFloor(id);
     }
   });
 },{threshold:0.35, rootMargin:'-15% 0px -55% 0px'});
 navSections.forEach(s=>sectionObserver.observe(s));
+
+// initialize floor car position after layout settles
+window.addEventListener('load', ()=> setActiveFloor('#hero'));
 
 // Back-to-top button (throttled via rAF)
 const toTopBtn = document.getElementById('toTop');
