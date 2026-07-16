@@ -262,7 +262,9 @@ body::after{
     border-top:1px solid var(--border);
     justify-content:space-between;
     padding:8px 10px calc(8px + env(safe-area-inset-bottom));
-    background:rgba(5,10,20,.82);
+    background:rgba(5,10,20,.94);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
   .quickNav .navItem{
     flex-direction:column;
@@ -302,7 +304,7 @@ body::after{
 }
 .toTop.show{opacity:1; pointer-events:auto; transform:translateY(0);}
 .toTop svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
-@media (max-width:760px){ .toTop{bottom:78px; left:14px; width:40px; height:40px;} }
+@media (max-width:760px){ .toTop{bottom:78px; left:14px; width:40px; height:40px; backdrop-filter:none; -webkit-backdrop-filter:none; background:rgba(6,12,22,.92);} }
 @media (min-width:761px){ .toTop{bottom:24px;} }
 @media (max-width:1180px) and (min-width:761px){ .toTop{left:18px;} }
 
@@ -367,14 +369,28 @@ body::after{
 
 /* Performance: strip heavy video + effects on small/low-power screens */
 @media (max-width:760px){
-  .bgVideo, .bgVideoFrame, .rings, .particles{display:none !important;}
+  .bgVideo, .bgVideoFrame, .rings, .particles, .aiCanvas, .scanBeam{display:none !important;}
   .hero::before{
     background:
       radial-gradient(circle at 20% 10%, rgba(143,214,255,.16), transparent 30%),
       radial-gradient(circle at 85% 70%, rgba(61,143,208,.14), transparent 34%),
       linear-gradient(180deg, #03060d, #081527 60%, #050d1a);
   }
-  .flares span{filter:blur(20px);}
+  .flares span{filter:blur(20px); animation:none; opacity:.16;}
+  .flares span:nth-child(3), .flares span:nth-child(4){display:none;}
+  body::before, body::after{animation:none; filter:blur(60px); opacity:.12;}
+  .grain{display:none;}
+  .logo::before{animation:none;}
+  .gradientTitle{animation:none; background-position:0% 50%;}
+  .edgeGlow{animation:none; opacity:.28;}
+  .miniBadge i{animation:none;}
+  .heroVideoBadge{animation:fadeUp .9s ease both;}
+  .btn, .iconBtn, .locationBtn, .pinIcon{
+    backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+    background:linear-gradient(160deg, rgba(18,32,52,.85), rgba(10,20,34,.85));
+  }
+  .btn::before, .iconBtn::before, .locationBtn::before{display:none;}
+  .btn:hover, .iconBtn:hover, .locationBtn:hover{transform:none;}
 }
 
 .hero::before{
